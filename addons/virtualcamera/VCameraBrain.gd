@@ -8,11 +8,11 @@ var transition_time : float = 0.0
 var transition_start : Transform
 
 func get_highest_priority_vcamera() -> VCamera:
-  var highest_priority = -2^63 # numerical limit
-  var cam = null
+  var cam = last_active_vcamera
+  var highest_priority = 0 if cam == null else cam.priority
   var vcams = get_tree().get_nodes_in_group("vcamera")
   for vcam in vcams:
-    if vcam is VCamera and vcam.priority > highest_priority:
+    if vcam is VCamera and (cam == null or vcam.priority > highest_priority):
       cam = vcam
       highest_priority = vcam.priority
   return cam
