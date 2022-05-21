@@ -7,7 +7,7 @@ Add Effects (blue icon) to your scene hierarchy to easily add screenshake, unifo
 
 ![Example Scene](https://raw.githubusercontent.com/BtheDestroyer/GodotVCamera/main/addons/virtualcamera/Screenshots/ExampleScene.png)
 
-A major difference between this addon and Cinemachine is that rather thanhaving a single "VCamera" node that does everything, I've decided to split up functionality across many different Nodes which all serve one purpose. These Nodes can be parented to each other in the scene heirarchy to compose more dynamic behavior 
+A major difference between this addon and Cinemachine is that rather thanhaving a single "VCamera" node that does everything, I've decided to split up functionality across many different Nodes which all serve one purpose rather than cramming everything into a single "VCamera" Node. These Nodes can be parented to each other in the scene heirarchy to compose more dynamic behavior.
 
 ## Features
 
