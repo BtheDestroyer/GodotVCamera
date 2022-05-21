@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://addons/virtualcamera/VCameraBrain.gd" type="Script" id=1]
-[ext_resource path="res://addons/virtualcamera/Effects/UniformMovement/UniformRotation.gd" type="Script" id=2]
-[ext_resource path="res://addons/virtualcamera/VCameras/VCamera.gd" type="Script" id=3]
+[ext_resource path="res://addons/virtualcamera/VCameras/VCamera.gd" type="Script" id=2]
+[ext_resource path="res://addons/virtualcamera/Effects/UniformMovement/UniformRotation.gd" type="Script" id=3]
 [ext_resource path="res://addons/virtualcamera/Effects/Follow.gd" type="Script" id=4]
 [ext_resource path="res://addons/virtualcamera/Effects/LookAt.gd" type="Script" id=5]
 [ext_resource path="res://addons/virtualcamera/Effects/Shake.gd" type="Script" id=6]
@@ -63,7 +63,7 @@ material/0 = null
 
 [node name="UniformRotation" type="Spatial" parent="Level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 degrees_per_second = Vector3( 0, 45, 0 )
 
 [node name="Character" type="MeshInstance" parent="Level/UniformRotation"]
@@ -80,12 +80,12 @@ script = ExtResource( 1 )
 [node name="StaticVCamera" type="Spatial" parent="."]
 process_priority = -1000
 transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -4, 2.4, 2 )
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 
 [node name="StaticVCamera2" type="Spatial" parent="."]
 process_priority = -1000
 transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 3, 2.4, 2 )
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 transition_mode = 3
 transition_power = 4.0
 
@@ -96,7 +96,7 @@ shake_strength_rotation = Vector3( 10, 10, 0 )
 
 [node name="ShakyVCamera" type="Spatial" parent="Shake"]
 process_priority = -1000
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 
 [node name="Follower" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 0 )
@@ -120,5 +120,5 @@ look_at_offset = Vector3( 0, 2, 0 )
 [node name="FollowerVCamera" type="Spatial" parent="Follower/LookAt/LookAt2"]
 process_priority = -1000
 transform = Transform( 1, 0, 0, 0, 1, -2.98023e-08, 0, 5.96046e-08, 1, 0, 0, 0 )
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 priority = 11
