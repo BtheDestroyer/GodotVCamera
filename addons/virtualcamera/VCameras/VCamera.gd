@@ -26,7 +26,7 @@ func _process(delta : float):
 
 # Gizmos
 var geom : ImmediateGeometry
-const color = Color(1, 0, 0)
+const color = Color(0.2, 0.6, 0.2)
 const geomlen = sqrt(0.5)
 func instantiate_geom():
   if Engine.is_editor_hint():
