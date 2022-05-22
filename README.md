@@ -47,6 +47,6 @@ A "LookAt" Node with a positional offset always looks just above the character.
 
 ### Look At Group
 
-A "LookAtGroup" Node is being used to look at the center of multiple objects (the two thin pillars and the player.
+A "LookAtGroup" Node is being used to look at the center of multiple objects (the two thin pillars and the player).
 
 ![Look At Group](https://raw.githubusercontent.com/BtheDestroyer/GodotVCamera/main/addons/virtualcamera/Screenshots/LookAtGroup.gif)
