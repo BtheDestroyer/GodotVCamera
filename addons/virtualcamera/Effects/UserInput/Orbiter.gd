@@ -20,6 +20,10 @@ export var middle_offset : Vector2 = Vector2.ZERO
 export var bottom_offset : Vector2 = Vector2.ZERO
 
 onready var input_rotation : Vector2 = Vector2.ZERO
+onready var lerped_input_rotation : Vector2 = Vector2.ZERO
+
+func _ready():
+  update_translation()
 
 func _input(event : InputEvent):
   if mouse_input and event is InputEventMouseMotion:
@@ -49,19 +53,19 @@ func _physics_process(delta : float):
       pitch_axis += Input.get_action_strength(positive_pitch_mapped_input)
     input_rotation.y += pitch_axis * rotation_speed.y * 5
     
-    input_rotation.x = fmod(input_rotation.x + 180, 360) - 180
+    input_rotation.x = wrapf(input_rotation.x, -180, 180)
     input_rotation.y = clamp(input_rotation.y, -90, 90)
-    print(input_rotation.y)
+    lerped_input_rotation.x = rad2deg(lerp_angle(deg2rad(lerped_input_rotation.x), deg2rad(input_rotation.x), lerp_speed))
+    lerped_input_rotation.y = lerp(lerped_input_rotation.y, input_rotation.y, lerp_speed)
     update_translation()
-    print(translation.y)
 
 func _process(delta : float):
   if Engine.editor_hint:
     rebuild_geom()
 
 func update_translation():
-  var pitch = input_rotation.y / 90
-  var yaw = deg2rad(input_rotation.x)
+  var pitch = lerped_input_rotation.y / 90
+  var yaw = deg2rad(lerped_input_rotation.x)
   var r = Quat(Vector3.UP, yaw)
   var a = Vector3.UP * orbit_heights.x + r * Vector3.BACK * orbit_radii.x + Vector3(top_offset.x, 0, top_offset.y)
   var b = Vector3.UP * orbit_heights.y + r * Vector3.BACK * orbit_radii.y + Vector3(middle_offset.x, 0, middle_offset.y)

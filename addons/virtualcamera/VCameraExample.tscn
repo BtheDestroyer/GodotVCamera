@@ -133,10 +133,7 @@ follow_lerp_t = 0.9
 [node name="Orbiter" type="Spatial" parent="Follow2"]
 transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0 )
 script = ExtResource( 7 )
-positive_yaw_mapped_input = "camera_left"
-negative_yaw_mapped_input = "camera_right"
-positive_pitch_mapped_input = "camera_down"
-negative_pitch_mapped_input = "camera_up"
+lerp_speed = 0.2
 orbit_radii = Vector3( 0.5, 3, 1 )
 orbit_heights = Vector3( 1.5, 1, -0.5 )
 
