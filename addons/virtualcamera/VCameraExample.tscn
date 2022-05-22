@@ -148,7 +148,6 @@ look_at_offset = Vector3( 0, 1, 0 )
 process_priority = -1000
 transform = Transform( 1, 0, 0, 0, 1, -2.98023e-08, 0, 5.96046e-08, 1, 0, 0, 0 )
 script = ExtResource( 2 )
-priority = 11
 
 [node name="LookAtGroup" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.20606, 4.12931, 3.09742 )
