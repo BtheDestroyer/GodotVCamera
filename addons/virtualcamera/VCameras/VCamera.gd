@@ -15,17 +15,17 @@ func transition_mode_is_nonlinear():
 
 func _ready():
   if Engine.editor_hint:
-    instantiate_geom()
+    rebuild_geom()
     set_process_priority(-1000)
   else:
     add_to_group("vcamera")
 
 func _process(delta : float):
   if Engine.editor_hint:
-    instantiate_geom()
+    rebuild_geom()
 
 # Gizmos
-var geom
+var geom : ImmediateGeometry
 const color = Color(1, 0, 0)
 const geomlen = sqrt(0.5)
 func instantiate_geom():
@@ -36,7 +36,6 @@ func instantiate_geom():
         geom = ImmediateGeometry.new()
         geom.set_name("geom")
         add_child(geom)
-        init_geom()
 
 func init_geom():
   if Engine.is_editor_hint() :
