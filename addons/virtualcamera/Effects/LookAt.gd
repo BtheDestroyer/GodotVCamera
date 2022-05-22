@@ -13,7 +13,7 @@ func has_look_at_target() -> bool:
   return not look_at_target.is_empty()
 
 func _physics_process(delta : float):
-  if not self.look_at_target.is_empty():
+  if has_look_at_target():
     var target = get_node_or_null(self.look_at_target)
     if target != null:
       var target_dist = global_transform.origin - target.global_transform.origin

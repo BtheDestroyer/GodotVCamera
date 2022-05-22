@@ -106,7 +106,7 @@ func add_circle_to_geom(radius : float, offset : Vector3 = Vector3.ZERO, vertice
   geom.set_color(color)
   var vertex_pos = Vector3.BACK * radius
   var vertex_angle = (PI * 2) / vertices
-  for i in range(vertices):
+  for i in vertices:
     geom.add_vertex(Quat(normal, vertex_angle * i) * vertex_pos + offset)
   geom.end()
 
