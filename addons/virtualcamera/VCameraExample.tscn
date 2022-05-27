@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://addons/virtualcamera/VCameraBrain.gd" type="Script" id=1]
 [ext_resource path="res://addons/virtualcamera/VCameras/VCamera.gd" type="Script" id=2]
@@ -8,6 +8,26 @@
 [ext_resource path="res://addons/virtualcamera/Effects/Shake.gd" type="Script" id=6]
 [ext_resource path="res://addons/virtualcamera/Effects/UserInput/Orbiter.gd" type="Script" id=7]
 [ext_resource path="res://addons/virtualcamera/Effects/LookAtGroup.gd" type="Script" id=8]
+
+[sub_resource type="GDScript" id=6]
+resource_name = "CameraChanger"
+script/source = "extends Spatial
+
+var vcameras : Array
+var index := 0
+
+func _ready() -> void:
+	vcameras = get_tree().get_nodes_in_group(\"vcamera\")
+
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed(\"ui_accept\"):
+		vcameras[index].priority = 10
+		index += 1
+		index %= vcameras.size()
+		vcameras[index].priority = 30
+		
+"
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 2, 0, 2 )
@@ -31,6 +51,7 @@ radius = 0.5
 height = 1.0
 
 [node name="VCameraExample" type="Spatial"]
+script = SubResource( 6 )
 
 [node name="Level" type="Node" parent="."]
 
@@ -152,3 +173,10 @@ target_weights = [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ) ]
 [node name="GroupTrackerVCamera" type="Spatial" parent="LookAtGroup"]
 process_priority = -1000
 script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Press space to change virtual camera"
