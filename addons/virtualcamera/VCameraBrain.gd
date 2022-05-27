@@ -24,15 +24,7 @@ func begin_transition(vcam : VCamera):
 
 func process_transition(vcam : VCamera):
 	var t = transition_time / vcam.transition_time
-	match vcam.transition_mode:
-		VCamera.TransitionMode.Linear:
-			t = NonlinearTransformations.linear(t)
-		VCamera.TransitionMode.SmoothStart:
-			t = NonlinearTransformations.smooth_start(t, vcam.transition_power)
-		VCamera.TransitionMode.SmoothStop:
-			t = NonlinearTransformations.smooth_stop(t, vcam.transition_power)
-		VCamera.TransitionMode.SmoothStep:
-			t = NonlinearTransformations.smooth_step(t, vcam.transition_power)
+	t = ease(t, vcam.transition_ease)
 	global_transform = transition_start.interpolate_with(vcam.global_transform, t)
 
 func snap_transition(vcam : VCamera):

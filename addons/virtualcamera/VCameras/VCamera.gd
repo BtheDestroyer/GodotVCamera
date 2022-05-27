@@ -6,12 +6,7 @@ class_name VCamera, "res://addons/virtualcamera/VCameras/VCamera.svg"
 export(int, 0, 1024) var priority : int = 10
 
 export var transition_time : float = 1.0
-enum TransitionMode { Linear, SmoothStart, SmoothStop, SmoothStep }
-export(int, "Linear", "Smooth Start", "Smooth Stop", "Smooth Step") var transition_mode : int = TransitionMode.Linear
-export var transition_power : float =  2.0
-
-func transition_mode_is_nonlinear():
-	return transition_mode != TransitionMode.Linear
+export(float, EASE) var transition_ease : float = -2.0
 
 func _ready():
 	if Engine.editor_hint:

@@ -103,8 +103,6 @@ script = ExtResource( 2 )
 process_priority = -1000
 transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 3, 2.4, 2 )
 script = ExtResource( 2 )
-transition_mode = 3
-transition_power = 4.0
 
 [node name="Shake" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.746, 4 )
