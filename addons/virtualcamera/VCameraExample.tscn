@@ -103,6 +103,7 @@ script = ExtResource( 2 )
 process_priority = -1000
 transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 3, 2.4, 2 )
 script = ExtResource( 2 )
+fov = 100.0
 
 [node name="Shake" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.746, 4 )
@@ -112,6 +113,7 @@ shake_strength_rotation = Vector3( 10, 10, 0 )
 [node name="ShakyVCamera" type="Spatial" parent="Shake"]
 process_priority = -1000
 script = ExtResource( 2 )
+fov = 90.0
 
 [node name="Follow1" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 0 )
@@ -137,6 +139,7 @@ look_at_offset = Vector3( 0, 2, 0 )
 process_priority = -1000
 transform = Transform( 1, 0, 0, 0, 1, -2.98023e-08, 0, 5.96046e-08, 1, 0, 0, 0 )
 script = ExtResource( 2 )
+fov = 60.0
 
 [node name="Follow2" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 0 )

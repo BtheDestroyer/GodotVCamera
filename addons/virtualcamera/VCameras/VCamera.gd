@@ -9,6 +9,10 @@ export var enabled : bool = true
 export var transition_time : float = 1.0
 export(float, EASE) var transition_ease : float = -2.0
 
+export(float, 1, 179) var fov : float = 70.0
+export(float, 0.01, 8192) var near : float = 0.05
+export(float, 0.01, 8192) var far : float = 100.0
+
 func _ready():
 	if Engine.editor_hint:
 		rebuild_geom()
