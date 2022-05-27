@@ -40,28 +40,23 @@ transform = Transform( 0.742981, 0.175351, -0.645934, 0, 0.965071, 0.261987, 0.6
 [node name="Ground" type="MeshInstance" parent="Level"]
 transform = Transform( 15, 0, 0, 0, 1, 0, 0, 0, 15, 0, 0, 0 )
 mesh = SubResource( 1 )
-material/0 = null
 
 [node name="Pillar1" type="MeshInstance" parent="Level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 0 )
 mesh = SubResource( 2 )
-material/0 = null
 
 [node name="Pillar2" type="MeshInstance" parent="Level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -2 )
 mesh = SubResource( 2 )
-material/0 = null
 
 [node name="Pillar3" type="MeshInstance" parent="Level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, -2 )
 mesh = SubResource( 3 )
-material/0 = null
 
 [node name="Pillar4" type="MeshInstance" parent="Level/Pillar3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5 )
 mesh = SubResource( 4 )
 skeleton = NodePath("../..")
-material/0 = null
 
 [node name="UniformRotation" type="Spatial" parent="Level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
@@ -72,7 +67,6 @@ degrees_per_second = Vector3( 0, 20, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0 )
 mesh = SubResource( 5 )
 skeleton = NodePath("../../..")
-material/0 = null
 
 [node name="VCameraBrain" type="Camera" parent="."]
 process_priority = -1000
@@ -157,5 +151,4 @@ target_weights = [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ) ]
 
 [node name="GroupTrackerVCamera" type="Spatial" parent="LookAtGroup"]
 process_priority = -1000
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 script = ExtResource( 2 )
