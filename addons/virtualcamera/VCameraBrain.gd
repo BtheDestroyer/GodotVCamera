@@ -11,7 +11,7 @@ var transition_start_near : float
 var transition_start_far : float
 
 func get_highest_priority_vcamera() -> VCamera:
-	var cam = last_active_vcamera if last_active_vcamera.enabled else null
+	var cam = last_active_vcamera if last_active_vcamera and last_active_vcamera.enabled else null
 	var highest_priority = 0 if cam == null else cam.priority
 	var vcams = get_tree().get_nodes_in_group("vcamera")
 	for vcam in vcams:
