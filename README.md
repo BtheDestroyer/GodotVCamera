@@ -1,4 +1,7 @@
 # GodotVCamera
+
+![Usage badge](https://pluginstats.brycedixon.dev/badge/count?project=VCamera)
+
 "Virtual Camera" addon inspired by Cinemachine for Unity
 
 Create VCameras (green icon) and set their priorities to automatically transition smoothly between them with the highest priority camera being used by VCameraBrains (red icon).
@@ -27,10 +30,26 @@ A "Shake" Node with its rotation strength set to (10, 10, 0).
 
 ### Character Follow
 
-A "Follower" Node is being used to constantly interpolate towards the character.
+A "Follow" Node is being used to constantly interpolate towards the character.
 
 A "LookAt" Node is being used to always look in the direction the character is moving.
 
 Another "LookAt" Node with a positional offset places the camera behind and above the character, but always looking just above it.
 
 ![Character Follow](https://raw.githubusercontent.com/BtheDestroyer/GodotVCamera/main/addons/virtualcamera/Screenshots/Follwer.gif)
+
+### 3rd Person Camera
+
+A "Follow" Node is being used to constantly track the character's position.
+
+An "Orbiter" Node is being used to allow the player to look around with the mouse or right stick.
+
+A "LookAt" Node with a positional offset always looks just above the character.
+
+![3rd Person Camera](https://raw.githubusercontent.com/BtheDestroyer/GodotVCamera/main/addons/virtualcamera/Screenshots/Orbiter.gif)
+
+### Look At Group
+
+A "LookAtGroup" Node is being used to look at the center of multiple objects (the two thin pillars and the player).
+
+![Look At Group](https://raw.githubusercontent.com/BtheDestroyer/GodotVCamera/main/addons/virtualcamera/Screenshots/LookAtGroup.gif)
