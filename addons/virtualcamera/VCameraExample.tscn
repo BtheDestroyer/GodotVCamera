@@ -1,24 +1,21 @@
 [gd_scene load_steps=18 format=2]
 
+
 [ext_resource path="res://addons/virtualcamera/VCameraBrain.gd" type="Script" id=1]
 [ext_resource path="res://addons/virtualcamera/VCameras/VCamera.gd" type="Script" id=2]
-[ext_resource path="res://addons/virtualcamera/Effects/UniformMovement/UniformRotation.gd" type="Script" id=3]
-[ext_resource path="res://addons/virtualcamera/Effects/Follow.gd" type="Script" id=4]
-[ext_resource path="res://addons/virtualcamera/Effects/LookAt.gd" type="Script" id=5]
-[ext_resource path="res://addons/virtualcamera/Effects/Shake.gd" type="Script" id=6]
-[ext_resource path="res://addons/virtualcamera/Effects/UserInput/Orbiter.gd" type="Script" id=7]
-[ext_resource path="res://addons/virtualcamera/Effects/LookAtGroup.gd" type="Script" id=8]
+[ext_resource path="res://addons/virtualcamera/TransformModifiers/UniformMovement/UniformRotation.gd" type="Script" id=3]
+[ext_resource path="res://addons/virtualcamera/TransformModifiers/Follow.gd" type="Script" id=4]
+[ext_resource path="res://addons/virtualcamera/TransformModifiers/LookAt.gd" type="Script" id=5]
+[ext_resource path="res://addons/virtualcamera/TransformModifiers/Shake.gd" type="Script" id=6]
+[ext_resource path="res://addons/virtualcamera/TransformModifiers/UserInput/Orbiter.gd" type="Script" id=7]
+[ext_resource path="res://addons/virtualcamera/TransformModifiers/LookAtGroup.gd" type="Script" id=8]
 
 [sub_resource type="GDScript" id=6]
 resource_name = "CameraChanger"
 script/source = "extends Spatial
 
-var vcameras : Array
-var index := 0
-
-func _ready() -> void:
-	vcameras = get_tree().get_nodes_in_group(\"vcamera\")
-
+onready var vcameras : Array = get_tree().get_nodes_in_group(\"vcamera\")
+var index = 0
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed(\"ui_accept\"):
@@ -26,7 +23,6 @@ func _process(delta: float) -> void:
 		index += 1
 		index %= vcameras.size()
 		vcameras[index].priority = 30
-		
 "
 
 [sub_resource type="ProceduralSky" id=7]
@@ -61,6 +57,17 @@ height = 1.0
 [sub_resource type="CapsuleMesh" id=9]
 radius = 0.5
 
+[sub_resource type="GDScript" id=7]
+script/source = "extends Label
+
+func _process(delta:float):
+	var camera_name = null
+	var brain = $\"../../../VCameraBrain\"
+	if brain && brain.last_active_vcamera != null:
+		camera_name = brain.last_active_vcamera.name
+	text = \"Current Camera: \" + camera_name
+"
+
 [node name="VCameraExample" type="Spatial"]
 script = SubResource( 6 )
 
@@ -76,24 +83,29 @@ shadow_enabled = true
 [node name="Ground" type="MeshInstance" parent="Level"]
 transform = Transform( 15, 0, 0, 0, 1, 0, 0, 0, 15, 0, 0, 0 )
 mesh = SubResource( 1 )
+
 material/0 = SubResource( 10 )
 
 [node name="Pillar1" type="MeshInstance" parent="Level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 0 )
 mesh = SubResource( 2 )
+material/0 = null
 
 [node name="Pillar2" type="MeshInstance" parent="Level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -2 )
 mesh = SubResource( 2 )
+material/0 = null
 
 [node name="Pillar3" type="MeshInstance" parent="Level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, -2 )
 mesh = SubResource( 3 )
+material/0 = null
 
 [node name="Pillar4" type="MeshInstance" parent="Level/Pillar3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5 )
 mesh = SubResource( 4 )
 skeleton = NodePath("../..")
+material/0 = null
 
 [node name="UniformRotation" type="Spatial" parent="Level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
@@ -104,6 +116,7 @@ degrees_per_second = Vector3( 0, 20, 0 )
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 5, 0, 0 )
 mesh = SubResource( 9 )
 skeleton = NodePath("../../..")
+material/0 = null
 
 [node name="VCameraBrain" type="Camera" parent="."]
 process_priority = -1000
@@ -192,9 +205,24 @@ target_weights = [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ) ]
 process_priority = -1000
 script = ExtResource( 2 )
 
-[node name="Label" type="Label" parent="."]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 40.0
+[node name="PanelContainer" type="PanelContainer" parent="."]
+margin_right = 14.0
+margin_bottom = 14.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 244.0
+margin_bottom = 39.0
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+margin_right = 237.0
 margin_bottom = 14.0
 text = "Press space to change virtual camera"
+
+[node name="CurrentCameraName" type="Label" parent="PanelContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 237.0
+margin_bottom = 32.0
+text = "Current Camera: WWWWW"
+script = SubResource( 7 )

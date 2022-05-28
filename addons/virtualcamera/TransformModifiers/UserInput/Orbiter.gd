@@ -1,5 +1,5 @@
 tool
-extends "res://addons/virtualcamera/Effects/UserInput/UserInput.gd"
+extends "res://addons/virtualcamera/TransformModifiers/UserInput/UserInput.gd"
 
 class_name Orbiter
 
