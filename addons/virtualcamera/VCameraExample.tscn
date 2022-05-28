@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://addons/virtualcamera/VCameraBrain.gd" type="Script" id=1]
 [ext_resource path="res://addons/virtualcamera/VCameras/VCamera.gd" type="Script" id=2]
@@ -29,20 +29,8 @@ func _process(delta: float) -> void:
 		
 "
 
-[sub_resource type="ProceduralSky" id=7]
-sun_latitude = 20.0
-sun_longitude = -135.0
-
-[sub_resource type="Environment" id=8]
-background_mode = 2
-background_sky = SubResource( 7 )
-ambient_light_sky_contribution = 0.2
-
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 2, 0, 2 )
-
-[sub_resource type="SpatialMaterial" id=10]
-albedo_color = Color( 0.572549, 0.572549, 0.572549, 1 )
 
 [sub_resource type="CylinderMesh" id=2]
 top_radius = 0.5
@@ -58,25 +46,21 @@ top_radius = 0.75
 bottom_radius = 0.75
 height = 1.0
 
-[sub_resource type="CapsuleMesh" id=9]
+[sub_resource type="SphereMesh" id=5]
 radius = 0.5
+height = 1.0
 
 [node name="VCameraExample" type="Spatial"]
 script = SubResource( 6 )
 
 [node name="Level" type="Node" parent="."]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Level"]
-environment = SubResource( 8 )
-
 [node name="DirectionalLight" type="DirectionalLight" parent="Level"]
-transform = Transform( 0.707107, 0.241845, -0.664463, 0, 0.939692, 0.34202, 0.707107, -0.241845, 0.664463, 0, 10, 0 )
-shadow_enabled = true
+transform = Transform( 0.742981, 0.175351, -0.645934, 0, 0.965071, 0.261987, 0.669312, -0.194651, 0.71703, 0, 3.5684, 0 )
 
 [node name="Ground" type="MeshInstance" parent="Level"]
 transform = Transform( 15, 0, 0, 0, 1, 0, 0, 0, 15, 0, 0, 0 )
 mesh = SubResource( 1 )
-material/0 = SubResource( 10 )
 
 [node name="Pillar1" type="MeshInstance" parent="Level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 0 )
@@ -101,8 +85,8 @@ script = ExtResource( 3 )
 degrees_per_second = Vector3( 0, 20, 0 )
 
 [node name="Character" type="MeshInstance" parent="Level/UniformRotation"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 5, 0, 0 )
-mesh = SubResource( 9 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0 )
+mesh = SubResource( 5 )
 skeleton = NodePath("../../..")
 
 [node name="VCameraBrain" type="Camera" parent="."]
@@ -166,10 +150,9 @@ follow_lerp_t = 0.9
 [node name="Orbiter" type="Spatial" parent="Follow2"]
 transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0 )
 script = ExtResource( 7 )
-mouse_sensitivity = 0.5
 lerp_speed = 0.2
-orbit_radii = Vector3( 0.5, 5, 2 )
-orbit_heights = Vector3( 4, 1, -0.5 )
+orbit_radii = Vector3( 0.5, 3, 1 )
+orbit_heights = Vector3( 1.5, 1, -0.5 )
 
 [node name="LookAt" type="Spatial" parent="Follow2/Orbiter"]
 transform = Transform( -1, -5.61559e-08, -1.40165e-07, 1.77636e-15, 0.928271, -0.371904, 1.50996e-07, -0.371904, -0.928271, 0, 0, 0 )
