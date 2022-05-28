@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://addons/virtualcamera/VCameraBrain.gd" type="Script" id=1]
 [ext_resource path="res://addons/virtualcamera/VCameras/VCamera.gd" type="Script" id=2]
@@ -13,11 +13,8 @@
 resource_name = "CameraChanger"
 script/source = "extends Spatial
 
-var vcameras : Array
-var index := 0
-
-func _ready() -> void:
-	vcameras = get_tree().get_nodes_in_group(\"vcamera\")
+onready var vcameras : Array = get_tree().get_nodes_in_group(\"vcamera\")
+var index = 0
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed(\"ui_accept\"):
@@ -47,6 +44,17 @@ height = 1.0
 [sub_resource type="SphereMesh" id=5]
 radius = 0.5
 height = 1.0
+
+[sub_resource type="GDScript" id=7]
+script/source = "extends Label
+
+func _process(delta:float):
+	var camera_name = null
+	var brain = $\"../../../VCameraBrain\"
+	if brain && brain.last_active_vcamera != null:
+		camera_name = brain.last_active_vcamera.name
+	text = \"Current Camera: \" + camera_name
+"
 
 [node name="VCameraExample" type="Spatial"]
 script = SubResource( 6 )
@@ -179,9 +187,24 @@ target_weights = [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ) ]
 process_priority = -1000
 script = ExtResource( 2 )
 
-[node name="Label" type="Label" parent="."]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 40.0
+[node name="PanelContainer" type="PanelContainer" parent="."]
+margin_right = 14.0
+margin_bottom = 14.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 244.0
+margin_bottom = 39.0
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+margin_right = 237.0
 margin_bottom = 14.0
 text = "Press space to change virtual camera"
+
+[node name="CurrentCameraName" type="Label" parent="PanelContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 237.0
+margin_bottom = 32.0
+text = "Current Camera: WWWWW"
+script = SubResource( 7 )
