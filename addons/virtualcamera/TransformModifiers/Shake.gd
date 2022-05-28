@@ -1,4 +1,4 @@
-extends "res://addons/virtualcamera/Effects/Effect.gd"
+extends "res://addons/virtualcamera/TransformModifiers/TransformModifier.gd"
 
 class_name Shake
 

@@ -1,4 +1,4 @@
-extends "res://addons/virtualcamera/Effects/UniformMovement/UniformMovement.gd"
+extends "res://addons/virtualcamera/TransformModifiers/UniformMovement/UniformMovement.gd"
 
 class_name UniformTranslation
 

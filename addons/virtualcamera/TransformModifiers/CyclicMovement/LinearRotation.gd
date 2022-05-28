@@ -1,4 +1,4 @@
-extends "res://addons/virtualcamera/Effects/CyclicMovement/CyclicMovement.gd"
+extends "res://addons/virtualcamera/TransformModifiers/CyclicMovement/CyclicMovement.gd"
 
 class_name LinearRotation
 
