@@ -2,7 +2,7 @@
 
 "Virtual Camera" addon inspired by Cinemachine for Unity
 
-[![Usage badge](https://pluginstats.brycedixon.dev/badge/count?project=VCamera)](#privacy-notice)
+[![Usage badge](https://pluginstats.brycedixon.dev/badge/count?project=VCamera)](#privacy-notice) [![Other addons](https://img.shields.io/badge/-See%20my%20other%20Godot%20addons-informational)](https://godotengine.org/asset-library/asset?user=BryceDixon)
 
 Create VCameras (green icon) and set their priorities to automatically transition smoothly between them with the highest priority camera being used by VCameraBrains (red icon).
 
