@@ -13,6 +13,7 @@ enum Action {
 }
 
 var target_vcamera : NodePath
+var filter_objects_by_group : String
 
 var on_enter_action : int = Action.ENABLE setget set_on_enter_action
 func set_on_enter_action(value : int) -> void:
@@ -39,10 +40,14 @@ func _ready() -> void:
 		get_parent().connect("area_exited", self, "_on_exited")
 		get_parent().connect("body_exited", self, "_on_exited")
 
-func _on_entered(_area) -> void:
+func _on_entered(area) -> void:
+	if filter_objects_by_group and not area.is_in_group(filter_objects_by_group):
+		return
 	self._overlapping_count += 1
 
-func _on_exited(_area) -> void:
+func _on_exited(area) -> void:
+	if filter_objects_by_group and not area.is_in_group(filter_objects_by_group):
+		return
 	self._overlapping_count -= 1
 
 func _set_overlapping_count(value : int):
@@ -70,9 +75,15 @@ func execute(action : int, priority : int, group : String) -> void:
 
 func _get_property_list() -> Array:
 	var properties : Array = []
+	
 	properties.append({
 		name = "target_vcamera",
 		type = TYPE_NODE_PATH
+	})
+	
+	properties.append({
+		name = "filter_objects_by_group",
+		type = TYPE_STRING
 	})
 	
 	var action_keys : String = ""
