@@ -1,7 +1,7 @@
 icon.png
-icon.png.import
 project.godot
 *.import
+default_env.tres
 
 # Godot-specific ignores
 .import/

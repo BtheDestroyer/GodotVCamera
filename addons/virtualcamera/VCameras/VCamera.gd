@@ -17,8 +17,7 @@ func _ready():
 	if Engine.editor_hint:
 		rebuild_geom()
 		set_process_priority(-1000)
-	else:
-		add_to_group("vcamera")
+	add_to_group("vcamera", true)
 
 func _process(delta : float):
 	if Engine.editor_hint:
