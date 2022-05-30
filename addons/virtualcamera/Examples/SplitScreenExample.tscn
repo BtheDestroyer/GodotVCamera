@@ -224,7 +224,7 @@ script = ExtResource( 5 )
 look_at_target = NodePath("../../../../Players/UniformRotation1/Player1")
 look_at_offset = Vector3( 0, 1, 0 )
 
-[node name="VCamera" type="Spatial" parent="World/VCameras/Follow/LookAt/LookAt" groups=["vcamera", "vcamera_1"]]
+[node name="VCamera" type="Spatial" parent="World/VCameras/Follow/LookAt/LookAt" groups=["vcamera_1"]]
 process_priority = -1000
 script = ExtResource( 3 )
 fov = 90.0
@@ -247,7 +247,7 @@ script = ExtResource( 5 )
 look_at_target = NodePath("../../../../Players/UniformRotation2/Player2")
 look_at_offset = Vector3( 0, 1, 0 )
 
-[node name="VCamera" type="Spatial" parent="World/VCameras/Follow2/LookAt/LookAt" groups=["vcamera", "vcamera_2"]]
+[node name="VCamera" type="Spatial" parent="World/VCameras/Follow2/LookAt/LookAt" groups=["vcamera_2"]]
 process_priority = -1000
 script = ExtResource( 3 )
 fov = 90.0
