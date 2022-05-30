@@ -10,8 +10,8 @@ export(float, 0, 1) var intensity : float = 1.0
 export(float, EASE) var intensity_curve : float = 2.0
 export var intensity_decrease_rate : float = 0.0
 
-export var strength_translation : Vector3 = Vector3.ZERO
-export var strength_rotation : Vector3 = Vector3.ZERO
+export var translation_strength : Vector3 = Vector3.ZERO
+export var rotation_strength : Vector3 = Vector3.ZERO
 
 var time : float = 0.0
 
@@ -33,8 +33,8 @@ func _physics_process(delta : float):
 		var amplitude = ease(intensity, intensity_curve)
 		
 		translation = Vector3(noise.get_noise_1d(time), noise.get_noise_1d(time - 10000), noise.get_noise_1d(time - 20000))
-		translation *= strength_translation * amplitude
+		translation *= translation_strength * amplitude
 		
 		rotation = Vector3(noise.get_noise_1d(time - 30000), noise.get_noise_1d(time - 40000), noise.get_noise_1d(time - 50000))
-		rotation *= strength_rotation * DEG2RAD * amplitude
+		rotation *= rotation_strength * DEG2RAD * amplitude
 
