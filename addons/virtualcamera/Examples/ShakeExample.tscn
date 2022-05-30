@@ -1,0 +1,368 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://addons/virtualcamera/VCameraBrain.gd" type="Script" id=1]
+[ext_resource path="res://addons/virtualcamera/TransformModifiers/Shake.gd" type="Script" id=2]
+[ext_resource path="res://addons/virtualcamera/VCameras/VCamera.gd" type="Script" id=3]
+[ext_resource path="res://addons/virtualcamera/TransformModifiers/BackForthMovement.gd" type="Script" id=4]
+
+[sub_resource type="ProceduralSky" id=1]
+sky_top_color = Color( 0.313726, 0.54902, 0.843137, 1 )
+sky_horizon_color = Color( 0.862745, 0.960784, 1, 1 )
+ground_bottom_color = Color( 0, 0, 0, 1 )
+ground_horizon_color = Color( 0.392157, 0.411765, 0.392157, 1 )
+sun_color = Color( 0.862745, 0.960784, 1, 1 )
+sun_latitude = 30.0
+sun_longitude = -150.0
+sun_angle_min = 2.0
+sun_angle_max = 30.0
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+ambient_light_color = Color( 0.27451, 0.27451, 0.27451, 1 )
+ambient_light_sky_contribution = 0.1
+fog_enabled = true
+fog_color = Color( 0.392157, 0.411765, 0.392157, 0.117647 )
+fog_sun_color = Color( 0.901961, 0.784314, 0.431373, 0.117647 )
+fog_sun_amount = 0.3
+fog_depth_begin = 5.0
+
+[sub_resource type="Animation" id=23]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Player:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Player:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Player/EyeLevel/BackForthMovement:strength_factor")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Train:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 2, -10.5 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Player/EyeLevel/BackForthMovement/HandCamShake/TraumaShake:intensity")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=24]
+resource_name = "TrainGoesBy"
+length = 20.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Player:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 1.3, 3.4, 4, 4.6, 7.7, 8 ),
+"transitions": PoolRealArray( 1, 2, 1, 1, 1, 1, 0.5, 1 ),
+"update": 0,
+"values": [ Vector3( 16, 1, 20 ), Vector3( 16, 1, 20 ), Vector3( 15.2667, 1, 19.4667 ), Vector3( 6.90123, 1, 13.3827 ), Vector3( 5.73877, 1, 11.4441 ), Vector3( 4.74324, 1, 9.81757 ), Vector3( 3.1, 1, -4.15 ), Vector3( 3, 1, -5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Player:rotation_degrees")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 3, 4.7, 7.8, 8.5, 9, 10.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 30, 0 ), Vector3( 0, 30, 0 ), Vector3( 0, 15, 0 ), Vector3( 0, -1.809, 0 ), Vector3( 0, -1.809, 0 ), Vector3( 0, -1.809, 0 ), Vector3( 0, -77.651, 0 ), Vector3( 0, 57.349, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Player/EyeLevel/BackForthMovement:strength_factor")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1, 1.2, 7.7, 8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.1, 0.1, 1.0, 1.0, 0.1 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Train:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 7.7, 16.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 60, 2, -10.5 ), Vector3( 60, 2, -10.5 ), Vector3( -200, 2, -10.5 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Player/EyeLevel/BackForthMovement/HandCamShake/TraumaShake:intensity")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 9.2, 9.5, 11.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0, 0.0 ]
+}
+
+[sub_resource type="CubeMesh" id=14]
+size = Vector3( 50, 2, 50 )
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0.392157, 0.72549, 0.392157, 1 )
+roughness = 0.7
+
+[sub_resource type="CylinderMesh" id=5]
+top_radius = 0.5
+bottom_radius = 0.5
+
+[sub_resource type="SpatialMaterial" id=11]
+albedo_color = Color( 0.333333, 0.254902, 0.372549, 1 )
+
+[sub_resource type="CylinderMesh" id=6]
+top_radius = 1.5
+bottom_radius = 1.5
+height = 1.0
+
+[sub_resource type="CylinderMesh" id=7]
+top_radius = 0.75
+bottom_radius = 0.75
+height = 1.0
+
+[sub_resource type="CubeMesh" id=12]
+size = Vector3( 4, 4, 4 )
+
+[sub_resource type="CubeMesh" id=15]
+size = Vector3( 50, 0.3, 0.3 )
+
+[sub_resource type="SpatialMaterial" id=16]
+albedo_color = Color( 0.333333, 0.254902, 0.372549, 1 )
+metallic = 1.0
+roughness = 0.1
+
+[sub_resource type="CubeMesh" id=17]
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=13]
+albedo_color = Color( 0.313726, 0.54902, 0.843137, 1 )
+roughness = 0.45
+
+[sub_resource type="CylinderMesh" id=18]
+top_radius = 0.5
+bottom_radius = 0.5
+height = 1.0
+
+[sub_resource type="CapsuleShape" id=19]
+radius = 0.5
+
+[sub_resource type="CapsuleMesh" id=20]
+radius = 0.5
+
+[sub_resource type="SpatialMaterial" id=9]
+albedo_color = Color( 0.843137, 0.45098, 0.333333, 1 )
+roughness = 0.45
+
+[sub_resource type="OpenSimplexNoise" id=21]
+seed = 58668
+octaves = 2
+
+[sub_resource type="OpenSimplexNoise" id=22]
+seed = 127425
+octaves = 4
+persistence = 0.8
+
+[node name="SplitScreenExample" type="Node"]
+
+[node name="World" type="Node" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = SubResource( 2 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="World"]
+transform = Transform( 0.866025, 0.25, -0.433013, 0, 0.866025, 0.5, 0.5, -0.433012, 0.75, 0, 10, 0 )
+shadow_enabled = true
+
+[node name="VCameraBrain" type="Camera" parent="World"]
+process_priority = -1000
+transform = Transform( 0.597657, -0.0422151, 0.80064, -0.0121213, 0.998023, 0.0616707, -0.80166, -0.0465627, 0.595963, 3, 2.70499, -5 )
+script = ExtResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="World"]
+autoplay = "TrainGoesBy"
+anims/RESET = SubResource( 23 )
+anims/TrainGoesBy = SubResource( 24 )
+
+[node name="Level" type="Spatial" parent="World"]
+
+[node name="Ground" type="MeshInstance" parent="World/Level"]
+mesh = SubResource( 14 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 4 )
+
+[node name="Pillar1" type="MeshInstance" parent="World/Level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.64687, 2, 5.30097 )
+mesh = SubResource( 5 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 11 )
+
+[node name="Pillar2" type="MeshInstance" parent="World/Level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.8734, 2, -5.92979 )
+mesh = SubResource( 5 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 11 )
+
+[node name="Pillar3" type="MeshInstance" parent="World/Level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3295, 1.5, -17.139 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 11 )
+
+[node name="Pillar4" type="MeshInstance" parent="World/Level/Pillar3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5 )
+mesh = SubResource( 7 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 11 )
+
+[node name="Block1" type="MeshInstance" parent="World/Level"]
+transform = Transform( 0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -1.9649, 3, 14.0545 )
+mesh = SubResource( 12 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 11 )
+
+[node name="Block2" type="MeshInstance" parent="World/Level"]
+transform = Transform( 0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -6.96492, 3, 0.0544901 )
+mesh = SubResource( 12 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 11 )
+
+[node name="Block3" type="MeshInstance" parent="World/Level"]
+transform = Transform( 1, 0, -1.73205, 0, 2, 0, 1.73205, 0, 1, 17.0351, 5, 0.0545006 )
+mesh = SubResource( 12 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 11 )
+
+[node name="Rail1" type="MeshInstance" parent="World/Level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, -12 )
+mesh = SubResource( 15 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 16 )
+
+[node name="Rail2" type="MeshInstance" parent="World/Level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, -9 )
+mesh = SubResource( 15 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 16 )
+
+[node name="Train" type="Spatial" parent="World"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -10.5 )
+
+[node name="Base" type="MeshInstance" parent="World/Train"]
+transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0 )
+mesh = SubResource( 17 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 13 )
+
+[node name="Cabin" type="MeshInstance" parent="World/Train"]
+transform = Transform( 5.28, 0, 0, 0, 3.12, 0, 0, 0, 3.3, 3, 2, 0 )
+mesh = SubResource( 17 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 13 )
+
+[node name="Nose" type="MeshInstance" parent="World/Train"]
+transform = Transform( -1.31134e-07, -5, 0, 3, -2.18557e-07, 0, 0, 0, 3, -2, 1, 0 )
+mesh = SubResource( 18 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 13 )
+
+[node name="Player" type="KinematicBody" parent="World"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Player"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0 )
+shape = SubResource( 19 )
+
+[node name="MeshInstance" type="MeshInstance" parent="World/Player"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0 )
+mesh = SubResource( 20 )
+material/0 = SubResource( 9 )
+
+[node name="EyeLevel" type="Spatial" parent="World/Player"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0 )
+
+[node name="BackForthMovement" type="Spatial" parent="World/Player/EyeLevel"]
+transform = Transform( 1, 0, 1.78814e-07, 0, 1, 0, -1.78814e-07, 0, 1, 0, 0.00500011, 0 )
+script = ExtResource( 4 )
+duration_forth = 0.4
+duration_back = 0.2
+ease_forth = 0.5
+ease_back = 2.0
+translate_by = Vector3( 0, 0.05, 0 )
+
+[node name="HandCamShake" type="Spatial" parent="World/Player/EyeLevel/BackForthMovement"]
+transform = Transform( 0.999947, 0.00859793, -0.00566972, -0.00858825, 0.999962, 0.0017305, 0.00568438, -0.00168172, 0.999982, 0, 0, 0 )
+script = ExtResource( 2 )
+noise = SubResource( 21 )
+speed = 0.5
+rotation_strength = Vector3( 1, 1, 1 )
+
+[node name="TraumaShake" type="Spatial" parent="World/Player/EyeLevel/BackForthMovement/HandCamShake"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+script = ExtResource( 2 )
+noise = SubResource( 22 )
+intensity = 0.0
+rotation_strength = Vector3( 15, 15, 15 )
+
+[node name="WalkingVCamera" type="Spatial" parent="World/Player/EyeLevel/BackForthMovement/HandCamShake/TraumaShake" groups=["vcamera"]]
+process_priority = -1000
+transform = Transform( 0.997874, 0.00742948, -0.064755, -0.0035656, 0.998217, 0.0595817, 0.0650822, -0.0592241, 0.996121, 0, 0, 0 )
+script = ExtResource( 3 )
+transition_time = 0.1
