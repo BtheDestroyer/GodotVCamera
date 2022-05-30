@@ -20,12 +20,13 @@ func _physics_process(delta : float):
 	if noise:
 		shake_time += delta * self.shake_speed * 100
 		translation = Vector3(
-			noise.get_noise_4d(shake_time, 0, 0, 0) * self.shake_strength_translation.x,
-			noise.get_noise_4d(0, shake_time, 0, 0) * self.shake_strength_translation.y,
-			noise.get_noise_4d(0, 0, shake_time, 0) * self.shake_strength_translation.z
+			noise.get_noise_1d(shake_time) * self.shake_strength_translation.x,
+			noise.get_noise_1d(shake_time - 10000) * self.shake_strength_translation.y,
+			noise.get_noise_1d(shake_time - 20000) * self.shake_strength_translation.z
 			)
 		rotation = Vector3(
-			deg2rad(noise.get_noise_4d(shake_time, 0, 0, 1) * self.shake_strength_rotation.x),
-			deg2rad(noise.get_noise_4d(0, shake_time, 0, 1) * self.shake_strength_rotation.y),
-			deg2rad(noise.get_noise_4d(0, 0, shake_time, 1) * self.shake_strength_rotation.z)
+			deg2rad(noise.get_noise_1d(shake_time - 30000) * self.shake_strength_rotation.x),
+			deg2rad(noise.get_noise_1d(shake_time - 40000) * self.shake_strength_rotation.y),
+			deg2rad(noise.get_noise_1d(shake_time - 50000) * self.shake_strength_rotation.z)
 			)
+
