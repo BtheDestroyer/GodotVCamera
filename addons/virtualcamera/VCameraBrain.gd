@@ -40,6 +40,9 @@ func process_transition(vcam : VCamera):
 func snap_transition(vcam : VCamera):
 	transition_time = vcam.transition_time
 	global_transform = vcam.global_transform
+	fov = vcam.fov
+	near = vcam.near
+	far = vcam.far
 
 func _physics_process(delta : float):
 	var vcam = get_highest_priority_vcamera()
