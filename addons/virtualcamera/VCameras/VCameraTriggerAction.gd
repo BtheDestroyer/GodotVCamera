@@ -79,14 +79,12 @@ func _get_property_list() -> Array:
 	gen.append("target_vcamera")
 	gen.append("filter_objects_by_group")
 	
-	gen.append_category("on_enter_")
 	gen.append_enum("on_enter_action", Action)
 	if on_enter_action == Action.SET_PRIORITY:
 		gen.append_number_range("on_enter_priority", 0, 1024)
 	if on_enter_action == Action.ADD_TO_GROUP or on_enter_action == Action.REMOVE_FROM_GROUP:
 		gen.append("on_enter_group")
 	
-	gen.append_category("on_exit_")
 	gen.append_enum("on_exit_action", Action)
 	if on_exit_action == Action.SET_PRIORITY:
 		gen.append_number_range("on_exit_priority", 0, 1024)
