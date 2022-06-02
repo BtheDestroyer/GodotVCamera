@@ -21,7 +21,7 @@ export(float, EXP, 0.0, 100.0) var min_distance_push_strength : float = 10.0
 export(float, EASE) var min_distance_push_easing : float = 2.0
 
 # Distance that Follow isn't allowed to go any farther away from target.
-export(float, EXP, 0.0, 2048.0) var max_distance : float = 2.0
+export(float, EXP, 0.0, 2048.0) var max_distance : float = 3.0
 # Softer margin starting from max_distance inwards which pulls Follow gently towards target.
 export(float, EXP, 0.0, 1024.0) var max_distance_push_margin : float = 1.0
 # Strength at which Follow will be pulled if it were at max_distance away.
