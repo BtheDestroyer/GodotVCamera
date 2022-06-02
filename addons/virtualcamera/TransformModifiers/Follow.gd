@@ -41,7 +41,7 @@ func _ready() -> void:
 		target = get_node(target_path)
 
 func _physics_process(delta : float):
-	# _ready() doesn't get called in-editor so set target every frame so update target for better experience.
+	# _ready() doesn't get called in-editor so set target every frame for better experience.
 	# In-game however, other scripts may set target directly, so we shouldn't override those.
 	if Engine.editor_hint and target_path:
 		target = get_node(target_path)
