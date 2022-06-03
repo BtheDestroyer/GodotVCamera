@@ -87,7 +87,7 @@ func append_enum(name : String, of_enum : Dictionary, allow_other_values : bool 
 	var new_property = {
 		name = name,
 		type = typeof(instance.get(name)),
-		hint = PROPERTY_HINT_ENUM_SUGGESTION if allow_other_values else PROPERTY_HINT_ENUM,
+		hint = PROPERTY_HINT_ENUM,
 		hint_string = hint_string,
 		usage = property_usage
 	}
