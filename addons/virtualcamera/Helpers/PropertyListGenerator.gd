@@ -1,7 +1,5 @@
 extends Reference
 
-class_name PropertyListGenerator
-
 var properties : Array = []
 var instance
 

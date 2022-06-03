@@ -74,7 +74,7 @@ func execute(action : int, priority : int, group : String) -> void:
 				vcamera.remove_from_group(group)
 
 func _get_property_list() -> Array:
-	var gen := PropertyListGenerator.new(self)
+	var gen := preload("res://addons/virtualcamera/Helpers/PropertyListGenerator.gd").new(self)
 	
 	gen.append("target_vcamera")
 	gen.append("filter_objects_by_group")
