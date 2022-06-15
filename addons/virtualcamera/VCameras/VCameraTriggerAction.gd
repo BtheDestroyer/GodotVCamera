@@ -74,80 +74,24 @@ func execute(action : int, priority : int, group : String) -> void:
 				vcamera.remove_from_group(group)
 
 func _get_property_list() -> Array:
-	var properties : Array = []
+	var gen := preload("res://addons/virtualcamera/Helpers/PropertyListGenerator.gd").new(self)
 	
-	properties.append({
-		name = "target_vcamera",
-		type = TYPE_NODE_PATH
-	})
+	gen.append("target_vcamera")
+	gen.append("filter_objects_by_group")
 	
-	properties.append({
-		name = "filter_objects_by_group",
-		type = TYPE_STRING
-	})
-	
-	var action_keys : String = ""
-	for key in Action.keys():
-		action_keys += key.capitalize() + ","
-	action_keys = action_keys.rstrip(",")
-	
-	properties.append({
-		name = "On Enter",
-		type = TYPE_NIL,
-		hint_string = "on_enter_",
-		usage = PROPERTY_USAGE_GROUP | PROPERTY_USAGE_SCRIPT_VARIABLE
-	})
-	
-	properties.append({
-		name = "on_enter_action",
-		hint = PROPERTY_HINT_ENUM,
-		hint_string = action_keys,
-		type = TYPE_INT
-	})
-	
+	gen.append_enum("on_enter_action", Action)
 	if on_enter_action == Action.SET_PRIORITY:
-		properties.append({
-			name = "on_enter_priority",
-			hint = PROPERTY_HINT_RANGE,
-			hint_string = "0,1024",
-			type = TYPE_INT
-		})
-	
+		gen.append_number_range("on_enter_priority", 0, 1024)
 	if on_enter_action == Action.ADD_TO_GROUP or on_enter_action == Action.REMOVE_FROM_GROUP:
-		properties.append({
-			name = "on_enter_group",
-			type = TYPE_STRING
-		})
+		gen.append("on_enter_group")
 	
-	properties.append({
-		name = "On Exit",
-		type = TYPE_NIL,
-		hint_string = "on_exit_",
-		usage = PROPERTY_USAGE_GROUP | PROPERTY_USAGE_SCRIPT_VARIABLE
-	})
-	
-	properties.append({
-		name = "on_exit_action",
-		hint = PROPERTY_HINT_ENUM,
-		hint_string = action_keys,
-		type = TYPE_INT
-	})
-	
+	gen.append_enum("on_exit_action", Action)
 	if on_exit_action == Action.SET_PRIORITY:
-		properties.append({
-			name = "on_exit_priority",
-			hint = PROPERTY_HINT_RANGE,
-			hint_string = "0,1024",
-			type = TYPE_INT
-		})
-	
+		gen.append_number_range("on_exit_priority", 0, 1024)
 	if on_exit_action == Action.ADD_TO_GROUP or on_exit_action == Action.REMOVE_FROM_GROUP:
-		properties.append({
-			name = "on_exit_group",
-			type = TYPE_STRING
-		})
+		gen.append("on_exit_group")
 	
-	return properties
+	return gen.properties
 
 func _get_configuration_warning():
 	if get_parent() is Area:
