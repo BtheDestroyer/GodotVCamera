@@ -4,6 +4,8 @@ extends EditorPlugin
 const VCAMERA_PREVIEW_SCENE = preload("res://addons/virtualcamera/VCameras/PreviewPlugin/VCameraPreviewPlugin.tscn")
 var vcamera_preview
 
+var follow_gizmo_plugin = preload("res://addons/virtualcamera/TransformModifiers/Gizmos/FollowGizmoPlugin.gd").new()
+
 func _enter_tree():
 	# Usage Tracking
 	# See: https://github.com/BtheDestroyer/GodotVCamera#privacy-notice
@@ -12,6 +14,8 @@ func _enter_tree():
 	var project_hash = ProjectSettings.get_setting("application/config/name").sha256_text()
 	http.request("https://pluginstats.brycedixon.dev/", [], true, HTTPClient.METHOD_POST, JSON.print({plugin="VCamera", project=project_hash}))
 	# Usage Tracking
+	
+	add_spatial_gizmo_plugin(follow_gizmo_plugin)
 
 func handles(object: Object) -> bool:
 	return object is VCamera
@@ -30,3 +34,4 @@ func close_vcamera_preview() -> void:
 
 func _exit_tree():
 	close_vcamera_preview()
+	remove_spatial_gizmo_plugin(follow_gizmo_plugin)
