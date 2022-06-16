@@ -25,7 +25,7 @@ onready var lerped_input_rotation : Vector2 = Vector2.ZERO
 func _ready():
 	update_translation()
 
-func _input(event : InputEvent):
+func _unhandled_input(event : InputEvent):
 	if mouse_input and event is InputEventMouseMotion:
 		input_rotation.x -= event.relative.x * rotation_speed.x * mouse_sensitivity
 		input_rotation.y += event.relative.y * rotation_speed.y * mouse_sensitivity
