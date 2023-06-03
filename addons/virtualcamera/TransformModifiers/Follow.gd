@@ -1,49 +1,49 @@
-tool
+@tool
 extends "res://addons/virtualcamera/TransformModifiers/TransformModifier.gd"
 # Follows target keeping set distance and offset.
 class_name Follow
 
 # Target to follow (settable from editor).
-export var target_path : NodePath
+@export var target_path : NodePath
 # Target to follow (settable runtime).
-var target : Spatial
+var target : Node3D
 
 # Offset to apply from target's position in global coordinates.
-export var offset : Vector3 = Vector3.ZERO
+@export var offset : Vector3 = Vector3.ZERO
 
 # Distance that Follow isn't allowed to go any closer to target.
-export(float, EXP, 0.0, 2048.0) var min_distance : float = 1.0
+@export_range(0.0, 2048.0, , "exp") var min_distance : float = 1.0 # (float, EXP, 0.0, 2048.0)
 # Softer margin starting from min_distance outwards which pushes Follow gently away from target.
-export(float, EXP, 0.0, 1024.0) var min_distance_push_margin : float = 1.0
+@export_range(0.0, 1024.0, , "exp") var min_distance_push_margin : float = 1.0 # (float, EXP, 0.0, 1024.0)
 # Strength at which Follow will be pushed away if it were at min_distance away.
-export(float, EXP, 0.0, 100.0) var min_distance_push_strength : float = 10.0
+@export_range(0.0, 100.0, , "exp") var min_distance_push_strength : float = 10.0 # (float, EXP, 0.0, 100.0)
 # How pushing strength will lessen when approaching end of margin.
-export(float, EASE) var min_distance_push_easing : float = 2.0
+@export_exp_easing var min_distance_push_easing : float = 2.0 # (float, EASE)
 
 # Distance that Follow isn't allowed to go any farther away from target.
-export(float, EXP, 0.0, 2048.0) var max_distance : float = 3.0
+@export_range(0.0, 2048.0, , "exp") var max_distance : float = 3.0 # (float, EXP, 0.0, 2048.0)
 # Softer margin starting from max_distance inwards which pulls Follow gently towards target.
-export(float, EXP, 0.0, 1024.0) var max_distance_push_margin : float = 1.0
+@export_range(0.0, 1024.0, , "exp") var max_distance_push_margin : float = 1.0 # (float, EXP, 0.0, 1024.0)
 # Strength at which Follow will be pulled if it were at max_distance away.
-export(float, EXP, 0.0, 100.0) var max_distance_push_strength : float = 10.0
+@export_range(0.0, 100.0, , "exp") var max_distance_push_strength : float = 10.0 # (float, EXP, 0.0, 100.0)
 # How pushing strength will lessen when approaching end of margin.
-export(float, EASE) var max_distance_push_easing : float = 2.0
+@export_exp_easing var max_distance_push_easing : float = 2.0 # (float, EASE)
 
 # Don't affect axes defined by bit mask.
 # Bit 0b001: X axis
 # Bit 0b010: Y axis
 # Bit 0b100: Z axis
-export(int, FLAGS, "X", "Y", "Z") var lock_axes : int = 0
+@export_flags("X","Y","Z") var lock_axes : int = 0 # (int, FLAGS, "X", "Y", "Z")
 
 
 func _ready() -> void:
-	if target_path:
+	if target_path != null and !target_path.is_empty():
 		target = get_node(target_path)
 
 func _physics_process(delta : float):
 	# _ready() doesn't get called in-editor so set target every frame for better experience.
 	# In-game however, other scripts may set target directly, so we shouldn't override those.
-	if Engine.editor_hint and target_path:
+	if Engine.is_editor_hint() and target_path != null and !target_path.is_empty():
 		target = get_node(target_path)
 	
 	if is_instance_valid(target):
@@ -80,5 +80,5 @@ func _physics_process(delta : float):
 		global_transform.origin = new_position
 
 func _process(_delta: float) -> void:
-	if Engine.editor_hint:
-		update_gizmo()
+	if Engine.is_editor_hint():
+		update_gizmos()

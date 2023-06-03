@@ -1,71 +1,73 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://cnkk5kjsmpw05"]
 
-[ext_resource path="res://addons/virtualcamera/VCameras/PreviewPlugin/VCameraPreviewPlugin.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://addons/virtualcamera/VCameras/PreviewPlugin/VCameraPreviewPlugin.gd" id="1"]
 
 [node name="VCamera Preview" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_right = 1024.0
-margin_bottom = 20.0
-custom_constants/separation = 10
+layout_mode = 2
+theme_override_constants/separation = 10
 
 [node name="AspectOptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
-margin_right = 140.0
-margin_bottom = 20.0
-text = "16:9 Standard HD"
-items = [ "16:9 Standard HD", null, false, 0, null, "4:3 Standard SD", null, false, 1, null, "9:16 Standard Portrait", null, false, 2, null, "16:9 Split Vertical", null, false, 3, null, "16:9 Split Horizontal", null, false, 4, null ]
+layout_mode = 2
+item_count = 5
 selected = 0
+popup/item_0/text = "16:9 Standard HD"
+popup/item_0/id = 0
+popup/item_1/text = "4:3 Standard SD"
+popup/item_1/id = 1
+popup/item_2/text = "9:16 Standard Portrait"
+popup/item_2/id = 2
+popup/item_3/text = "16:9 Split Vertical"
+popup/item_3/id = 3
+popup/item_4/text = "16:9 Split Horizontal"
+popup/item_4/id = 4
 
 [node name="KeepOptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
-margin_left = 150.0
-margin_right = 291.0
-margin_bottom = 20.0
-text = "FOV: Keep Height"
-items = [ "FOV: Keep Height", null, false, 0, null, "FOV: Keep Width", null, false, 1, null ]
-selected = 0
+layout_mode = 2
+item_count = 2
+selected = 1
+popup/item_0/text = "FOV: Keep Width"
+popup/item_0/id = 0
+popup/item_1/text = "FOV: Keep Height"
+popup/item_1/id = 1
 
 [node name="Control" type="Control" parent="VBoxContainer/HBoxContainer"]
-margin_left = 301.0
-margin_right = 994.0
-margin_bottom = 20.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="CloseButton" type="Button" parent="VBoxContainer/HBoxContainer"]
-margin_left = 1004.0
-margin_right = 1024.0
-margin_bottom = 20.0
+layout_mode = 2
 text = "X"
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
-margin_top = 24.0
-margin_right = 1024.0
-margin_bottom = 600.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 ratio = 1.7778
 
-[node name="ViewportContainer" type="ViewportContainer" parent="VBoxContainer/AspectRatioContainer"]
-margin_top = 0.00360107
-margin_right = 1024.0
-margin_bottom = 575.996
+[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer/AspectRatioContainer"]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
-[node name="Viewport" type="Viewport" parent="VBoxContainer/AspectRatioContainer/ViewportContainer"]
-size = Vector2( 1024, 575 )
+[node name="SubViewport" type="SubViewport" parent="VBoxContainer/AspectRatioContainer/SubViewportContainer"]
 handle_input_locally = false
-render_target_update_mode = 3
-shadow_atlas_size = 1
+size = Vector2i(1089, 613)
+render_target_update_mode = 4
 
-[node name="Camera" type="Camera" parent="VBoxContainer/AspectRatioContainer/ViewportContainer/Viewport"]
+[node name="Camera3D" type="Camera3D" parent="VBoxContainer/AspectRatioContainer/SubViewportContainer/SubViewport"]
 
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/AspectOptionButton" to="." method="_on_AspectOptionButton_item_selected"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/KeepOptionButton" to="." method="_on_KeepOptionButton_item_selected"]

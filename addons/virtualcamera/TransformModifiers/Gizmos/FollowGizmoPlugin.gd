@@ -1,6 +1,6 @@
-extends EditorSpatialGizmoPlugin
+extends EditorNode3DGizmoPlugin
 
-func has_gizmo(spatial: Spatial) -> bool:
+func _has_gizmo(spatial: Node3D) -> bool:
 	return spatial is Follow
 
 func _init():
@@ -8,18 +8,18 @@ func _init():
 	create_material("billboard", Color(0.2, 0.4, 1), true)
 	create_handle_material("handles")
 
-func get_name() -> String:
+func _get_gizmo_name() -> String:
 	return "Follow"
-
-func redraw(gizmo: EditorSpatialGizmo) -> void:
+	
+func _redraw(gizmo: EditorNode3DGizmo) -> void:
 	gizmo.clear()
 	
-	var target : Follow = gizmo.get_spatial_node()
+	var target : Follow = gizmo.get_node_3d()
 	var lines : Array = []
 	
 	if target.lock_axes == 0b000:
 		_add_distance_circles(lines, target, Vector3.FORWARD)
-		gizmo.add_lines(PoolVector3Array(lines), get_material("billboard", gizmo), true)
+		gizmo.add_lines(PackedVector3Array(lines), get_material("billboard", gizmo), true)
 	else:
 		if (not target.lock_axes & 0b100) and (not target.lock_axes & 0b010):
 			_add_distance_circles(lines, target, Vector3.RIGHT)
@@ -38,7 +38,7 @@ func redraw(gizmo: EditorSpatialGizmo) -> void:
 			_add_distance_lines(lines, target, Vector3.FORWARD)
 			_add_distance_lines(lines, target, Vector3.BACK)
 		
-		gizmo.add_lines(PoolVector3Array(lines), get_material("main", gizmo))
+		gizmo.add_lines(PackedVector3Array(lines), get_material("main", gizmo))
 
 func _add_distance_circles(lines : Array, target : Follow, normal : Vector3):
 	_add_circle(lines, Vector3.ZERO, target.min_distance, normal)
@@ -63,8 +63,8 @@ func _add_circle(lines : Array, offset : Vector3, radius : float, normal : Vecto
 	var vertex_angle = TAU / vertices
 	
 	for i in vertices:
-		lines.append(Quat(normal, vertex_angle * i) * vertex_pos + offset)
-		lines.append(Quat(normal, vertex_angle * (i + 1)) * vertex_pos + offset)
+		lines.append(Quaternion(normal, vertex_angle * i) * vertex_pos + offset)
+		lines.append(Quaternion(normal, vertex_angle * (i + 1)) * vertex_pos + offset)
 
 func _add_dashed_circle(lines : Array, offset : Vector3, radius : float, normal : Vector3 = Vector3.UP, segment_length : float = .3):
 	if radius <= 0:
@@ -76,7 +76,7 @@ func _add_dashed_circle(lines : Array, offset : Vector3, radius : float, normal 
 	var vertex_angle = TAU / vertices
 	
 	for i in range(0, vertices, 1):
-		lines.append(Quat(normal, vertex_angle * i) * vertex_pos + offset)
+		lines.append(Quaternion(normal, vertex_angle * i) * vertex_pos + offset)
 
 func _add_dashed_line(lines : Array, from : Vector3, to : Vector3, segment_length : float = .1) -> void:
 	var direction : Vector3 = to - from

@@ -1,4 +1,4 @@
-tool
+@tool
 extends Node
 
 class_name VCameraTriggerAction
@@ -15,30 +15,30 @@ enum Action {
 var target_vcamera : NodePath
 var filter_objects_by_group : String
 
-var on_enter_action : int = Action.ENABLE setget set_on_enter_action
+var on_enter_action : int = Action.ENABLE: set = set_on_enter_action
 func set_on_enter_action(value : int) -> void:
 	on_enter_action = value
-	property_list_changed_notify()
+	notify_property_list_changed()
 
 var on_enter_priority : int = 0
 var on_enter_group : String = ""
 
-var on_exit_action : int = Action.DISABLE setget set_on_exit_action
+var on_exit_action : int = Action.DISABLE: set = set_on_exit_action
 func set_on_exit_action(value : int) -> void:
 	on_exit_action = value
-	property_list_changed_notify()
+	notify_property_list_changed()
 
 var on_exit_priority : int = 0
 var on_exit_group : String = ""
 
-var _overlapping_count : int = 0 setget _set_overlapping_count
+var _overlapping_count : int = 0: set = _set_overlapping_count
 
 func _ready() -> void:
-	if get_parent() is Area and not Engine.editor_hint:
-		get_parent().connect("area_entered", self, "_on_entered")
-		get_parent().connect("body_entered", self, "_on_entered")
-		get_parent().connect("area_exited", self, "_on_exited")
-		get_parent().connect("body_exited", self, "_on_exited")
+	if get_parent() is Area3D and not Engine.is_editor_hint():
+		get_parent().connect("area_entered", Callable(self, "_on_entered"))
+		get_parent().connect("body_entered", Callable(self, "_on_entered"))
+		get_parent().connect("area_exited", Callable(self, "_on_exited"))
+		get_parent().connect("body_exited", Callable(self, "_on_exited"))
 
 func _on_entered(area) -> void:
 	if filter_objects_by_group and not area.is_in_group(filter_objects_by_group):
@@ -93,8 +93,8 @@ func _get_property_list() -> Array:
 	
 	return gen.properties
 
-func _get_configuration_warning():
-	if get_parent() is Area:
+func _get_configuration_warnings():
+	if get_parent() is Area3D:
 		return ""
 	else:
-		return "VCameraTriggerAction has to be child of Area to be usable.\n\nAction choosen on enter will be executed when first area/body enters parent Area.\nAction choosen on exit will be executed when last area/body leaves parent Area."
+		return "VCameraTriggerAction has to be child of Area3D to be usable.\n\nAction choosen on enter will be executed when first area/body enters parent Area3D.\nAction choosen on exit will be executed when last area/body leaves parent Area3D."
