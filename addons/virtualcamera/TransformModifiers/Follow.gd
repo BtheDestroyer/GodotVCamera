@@ -12,20 +12,20 @@ var target : Node3D
 @export var offset : Vector3 = Vector3.ZERO
 
 # Distance that Follow isn't allowed to go any closer to target.
-@export_range(0.0, 2048.0, , "exp") var min_distance : float = 1.0 # (float, EXP, 0.0, 2048.0)
+@export_range(0.0, 2048.0) var min_distance : float = 1.0 # (float, EXP, 0.0, 2048.0)
 # Softer margin starting from min_distance outwards which pushes Follow gently away from target.
-@export_range(0.0, 1024.0, , "exp") var min_distance_push_margin : float = 1.0 # (float, EXP, 0.0, 1024.0)
+@export_range(0.0, 1024.0) var min_distance_push_margin : float = 1.0 # (float, EXP, 0.0, 1024.0)
 # Strength at which Follow will be pushed away if it were at min_distance away.
-@export_range(0.0, 100.0, , "exp") var min_distance_push_strength : float = 10.0 # (float, EXP, 0.0, 100.0)
+@export_range(0.0, 100.0) var min_distance_push_strength : float = 10.0 # (float, EXP, 0.0, 100.0)
 # How pushing strength will lessen when approaching end of margin.
 @export_exp_easing var min_distance_push_easing : float = 2.0 # (float, EASE)
 
 # Distance that Follow isn't allowed to go any farther away from target.
-@export_range(0.0, 2048.0, , "exp") var max_distance : float = 3.0 # (float, EXP, 0.0, 2048.0)
+@export_range(0.0, 2048.0) var max_distance : float = 3.0 # (float, EXP, 0.0, 2048.0)
 # Softer margin starting from max_distance inwards which pulls Follow gently towards target.
-@export_range(0.0, 1024.0, , "exp") var max_distance_push_margin : float = 1.0 # (float, EXP, 0.0, 1024.0)
+@export_range(0.0, 1024.0) var max_distance_push_margin : float = 1.0 # (float, EXP, 0.0, 1024.0)
 # Strength at which Follow will be pulled if it were at max_distance away.
-@export_range(0.0, 100.0, , "exp") var max_distance_push_strength : float = 10.0 # (float, EXP, 0.0, 100.0)
+@export_range(0.0, 100.0) var max_distance_push_strength : float = 10.0 # (float, EXP, 0.0, 100.0)
 # How pushing strength will lessen when approaching end of margin.
 @export_exp_easing var max_distance_push_easing : float = 2.0 # (float, EASE)
 

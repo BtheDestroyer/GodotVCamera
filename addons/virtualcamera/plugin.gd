@@ -12,7 +12,7 @@ func _enter_tree():
 	var http = HTTPRequest.new()
 	add_child(http)
 	var project_hash = ProjectSettings.get_setting("application/config/name").sha256_text()
-	http.request("https://pluginstats.brycedixon.dev/", [], HTTPClient.METHOD_POST, JSON.stringify({plugin="VCamera", project=project_hash}))
+	#http.request("https://pluginstats.brycedixon.dev/", [], HTTPClient.METHOD_POST, JSON.stringify({plugin="VCamera", project=project_hash}))
 	# Usage Tracking
 	
 	add_node_3d_gizmo_plugin(follow_gizmo_plugin)
