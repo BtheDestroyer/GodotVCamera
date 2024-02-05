@@ -1,247 +1,233 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=22 format=3 uid="uid://djyiwotrm124w"]
 
-[ext_resource path="res://addons/virtualcamera/VCameraBrain.gd" type="Script" id=1]
-[ext_resource path="res://addons/virtualcamera/TransformModifiers/UniformMovement/UniformRotation.gd" type="Script" id=2]
-[ext_resource path="res://addons/virtualcamera/VCameras/VCamera.gd" type="Script" id=3]
-[ext_resource path="res://addons/virtualcamera/TransformModifiers/Follow.gd" type="Script" id=4]
-[ext_resource path="res://addons/virtualcamera/TransformModifiers/LookAt.gd" type="Script" id=5]
+[ext_resource type="Script" path="res://addons/virtualcamera/VCameraBrain.gd" id="1"]
+[ext_resource type="Script" path="res://addons/virtualcamera/TransformModifiers/UniformMovement/UniformRotation.gd" id="2"]
+[ext_resource type="Script" path="res://addons/virtualcamera/VCameras/VCamera.gd" id="3"]
+[ext_resource type="Script" path="res://addons/virtualcamera/TransformModifiers/Follow.gd" id="4"]
+[ext_resource type="Script" path="res://addons/virtualcamera/TransformModifiers/LookAt.gd" id="5"]
 
-[sub_resource type="ProceduralSky" id=1]
-sky_top_color = Color( 0.313726, 0.54902, 0.843137, 1 )
-sky_horizon_color = Color( 0.862745, 0.960784, 1, 1 )
-ground_bottom_color = Color( 0, 0, 0, 1 )
-ground_horizon_color = Color( 0.392157, 0.411765, 0.392157, 1 )
-sun_color = Color( 0.862745, 0.960784, 1, 1 )
-sun_latitude = 30.0
-sun_longitude = -150.0
-sun_angle_min = 2.0
-sun_angle_max = 30.0
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qne8l"]
 
-[sub_resource type="Environment" id=2]
+[sub_resource type="Sky" id="Sky_popkt"]
+sky_material = SubResource("ProceduralSkyMaterial_qne8l")
+
+[sub_resource type="Environment" id="Environment_fde4p"]
 background_mode = 2
-background_sky = SubResource( 1 )
-ambient_light_color = Color( 0.27451, 0.27451, 0.27451, 1 )
-ambient_light_sky_contribution = 0.1
-fog_enabled = true
-fog_color = Color( 0.392157, 0.411765, 0.392157, 0.117647 )
-fog_sun_color = Color( 0.901961, 0.784314, 0.431373, 0.117647 )
-fog_sun_amount = 0.3
-fog_depth_begin = 5.0
+sky = SubResource("Sky_popkt")
 
-[sub_resource type="SpatialMaterial" id=4]
-albedo_color = Color( 0.392157, 0.72549, 0.392157, 1 )
+[sub_resource type="StandardMaterial3D" id="4"]
+albedo_color = Color(0.392157, 0.72549, 0.392157, 1)
 roughness = 0.7
 
-[sub_resource type="SpatialMaterial" id=10]
-albedo_color = Color( 0.901961, 0.784314, 0.431373, 1 )
+[sub_resource type="StandardMaterial3D" id="10"]
+albedo_color = Color(0.901961, 0.784314, 0.431373, 1)
 
-[sub_resource type="CylinderMesh" id=5]
-top_radius = 0.5
-bottom_radius = 0.5
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sqs0p"]
+albedo_color = Color(0.333333, 0.254902, 0.372549, 1)
 
-[sub_resource type="SpatialMaterial" id=11]
-albedo_color = Color( 0.333333, 0.254902, 0.372549, 1 )
+[sub_resource type="CylinderMesh" id="5"]
 
-[sub_resource type="CylinderMesh" id=6]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bswp4"]
+albedo_color = Color(0.333333, 0.254902, 0.372549, 1)
+
+[sub_resource type="CylinderMesh" id="6"]
 top_radius = 1.5
 bottom_radius = 1.5
 height = 1.0
 
-[sub_resource type="CylinderMesh" id=7]
+[sub_resource type="CylinderMesh" id="7"]
 top_radius = 0.75
 bottom_radius = 0.75
 height = 1.0
 
-[sub_resource type="CubeMesh" id=12]
-size = Vector3( 4, 4, 4 )
+[sub_resource type="BoxMesh" id="12"]
+size = Vector3(4, 4, 4)
 
-[sub_resource type="PrismMesh" id=8]
-size = Vector3( 2, 3, 0.3 )
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kbdeg"]
+albedo_color = Color(0.333333, 0.254902, 0.372549, 1)
 
-[sub_resource type="SpatialMaterial" id=9]
-albedo_color = Color( 0.843137, 0.45098, 0.333333, 1 )
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r6dwh"]
+albedo_color = Color(0.333333, 0.254902, 0.372549, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_21h1c"]
+albedo_color = Color(0.843137, 0.45098, 0.333333, 1)
 roughness = 0.45
 
-[sub_resource type="SpatialMaterial" id=13]
-albedo_color = Color( 0.313726, 0.54902, 0.843137, 1 )
+[sub_resource type="PrismMesh" id="8"]
+size = Vector3(2, 3, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_77y2y"]
+albedo_color = Color(0.313726, 0.54902, 0.843137, 1)
 roughness = 0.45
 
 [node name="SplitScreenExample" type="Node"]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/separation = 0
+theme_override_constants/separation = 0
 
-[node name="ViewportContainer1" type="ViewportContainer" parent="HBoxContainer"]
-margin_right = 512.0
-margin_bottom = 600.0
+[node name="ViewportContainer1" type="SubViewportContainer" parent="HBoxContainer"]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
-[node name="Viewport" type="Viewport" parent="HBoxContainer/ViewportContainer1"]
-size = Vector2( 512, 600 )
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/ViewportContainer1"]
 handle_input_locally = false
-render_target_update_mode = 3
-shadow_atlas_size = 1
+size = Vector2i(576, 648)
+render_target_update_mode = 4
 
-[node name="VCameraBrain" type="Camera" parent="HBoxContainer/ViewportContainer1/Viewport"]
+[node name="VCameraBrain" type="Camera3D" parent="HBoxContainer/ViewportContainer1/SubViewport"]
 process_priority = -1000
-transform = Transform( -1, 2.54818e-08, -1.4883e-07, 0, 0.985658, 0.168758, 1.50996e-07, 0.168758, -0.985658, 13, 0.482905, -3.98861 )
+transform = Transform3D(-1, 2.54818e-08, -1.4883e-07, 0, 0.985658, 0.168758, 1.50996e-07, 0.168758, -0.985658, 13, 0.482905, -3.98861)
 fov = 90.0
-script = ExtResource( 1 )
+far = 100.0
+script = ExtResource("1")
 target_group = "vcamera_1"
 
-[node name="ViewportContainer2" type="ViewportContainer" parent="HBoxContainer"]
-margin_left = 512.0
-margin_right = 1024.0
-margin_bottom = 600.0
+[node name="ViewportContainer2" type="SubViewportContainer" parent="HBoxContainer"]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
-[node name="Viewport" type="Viewport" parent="HBoxContainer/ViewportContainer2"]
-size = Vector2( 512, 600 )
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/ViewportContainer2"]
 handle_input_locally = false
-render_target_update_mode = 3
-shadow_atlas_size = 1
+size = Vector2i(576, 648)
+render_target_update_mode = 4
 
-[node name="VCameraBrain" type="Camera" parent="HBoxContainer/ViewportContainer2/Viewport"]
+[node name="VCameraBrain" type="Camera3D" parent="HBoxContainer/ViewportContainer2/SubViewport"]
 process_priority = -1000
-transform = Transform( -1, 3.36599e-08, -1.47196e-07, 0, 0.974837, 0.22292, 1.50996e-07, 0.22292, -0.974837, 17, 0.714761, -4.00029 )
+transform = Transform3D(-1, 3.36599e-08, -1.47196e-07, 0, 0.974837, 0.22292, 1.50996e-07, 0.22292, -0.974837, 17, 0.714761, -4.00029)
 fov = 90.0
-script = ExtResource( 1 )
+far = 100.0
+script = ExtResource("1")
 target_group = "vcamera_2"
 
 [node name="World" type="Node" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
-environment = SubResource( 2 )
+environment = SubResource("Environment_fde4p")
 
-[node name="DirectionalLight" type="DirectionalLight" parent="World"]
-transform = Transform( 0.866025, 0.25, -0.433013, 0, 0.866025, 0.5, 0.5, -0.433012, 0.75, 0, 10, 0 )
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(0.866025, 0.25, -0.433013, 0, 0.866025, 0.5, 0.5, -0.433012, 0.75, 0, 10, 0)
 shadow_enabled = true
 
-[node name="Level" type="Spatial" parent="World"]
+[node name="Level" type="Node3D" parent="World"]
 
-[node name="Ground" type="CSGCombiner" parent="World/Level"]
+[node name="Ground" type="CSGCombiner3D" parent="World/Level"]
 
-[node name="CSGBox" type="CSGBox" parent="World/Level/Ground"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0 )
-width = 60.0
-height = 4.0
-depth = 60.0
-material = SubResource( 4 )
+[node name="CSGBox3D" type="CSGBox3D" parent="World/Level/Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+size = Vector3(60, 4, 60)
+material = SubResource("4")
 
-[node name="CSGTorus" type="CSGTorus" parent="World/Level/Ground"]
-transform = Transform( 1, 0, 0, 0, 0.4, 0, 0, 0, 1, 0, 0, 0 )
+[node name="CSGTorus3D" type="CSGTorus3D" parent="World/Level/Ground"]
+transform = Transform3D(1, 0, 0, 0, 0.4, 0, 0, 0, 1, 0, 0, 0)
 operation = 2
 inner_radius = 10.0
 outer_radius = 20.0
 sides = 32
-material = SubResource( 10 )
+material = SubResource("10")
 
-[node name="Pillar1" type="MeshInstance" parent="World/Level"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.64687, 1, 5.30097 )
-mesh = SubResource( 5 )
+[node name="Pillar1" type="MeshInstance3D" parent="World/Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.64687, 1, 5.30097)
+material_override = SubResource("StandardMaterial3D_sqs0p")
+mesh = SubResource("5")
 skeleton = NodePath("../..")
-material/0 = SubResource( 11 )
 
-[node name="Pillar2" type="MeshInstance" parent="World/Level"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.8734, 0.999999, 3.07021 )
-mesh = SubResource( 5 )
+[node name="Pillar2" type="MeshInstance3D" parent="World/Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.8734, 0.999999, 3.07021)
+material_override = SubResource("StandardMaterial3D_bswp4")
+mesh = SubResource("5")
 skeleton = NodePath("../..")
-material/0 = SubResource( 11 )
 
-[node name="Pillar3" type="MeshInstance" parent="World/Level"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3295, 0.5, 18.861 )
-mesh = SubResource( 6 )
+[node name="Pillar3" type="MeshInstance3D" parent="World/Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3295, 0.5, 18.861)
+material_override = SubResource("StandardMaterial3D_sqs0p")
+mesh = SubResource("6")
 skeleton = NodePath("../..")
-material/0 = SubResource( 11 )
 
-[node name="Pillar4" type="MeshInstance" parent="World/Level/Pillar3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5 )
-mesh = SubResource( 7 )
+[node name="Pillar4" type="MeshInstance3D" parent="World/Level/Pillar3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
+material_override = SubResource("StandardMaterial3D_sqs0p")
+mesh = SubResource("7")
 skeleton = NodePath("../../..")
-material/0 = SubResource( 11 )
 
-[node name="Block1" type="MeshInstance" parent="World/Level"]
-transform = Transform( 0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 19.0351, 2, 22.0545 )
-mesh = SubResource( 12 )
+[node name="Block1" type="MeshInstance3D" parent="World/Level"]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 19.0351, 2, 22.0545)
+material_override = SubResource("StandardMaterial3D_sqs0p")
+mesh = SubResource("12")
 skeleton = NodePath("../..")
-material/0 = SubResource( 11 )
 
-[node name="Block2" type="MeshInstance" parent="World/Level"]
-transform = Transform( 0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -5.96492, 2, -2.94551 )
-mesh = SubResource( 12 )
+[node name="Block2" type="MeshInstance3D" parent="World/Level"]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -5.96492, 2, -2.94551)
+material_override = SubResource("StandardMaterial3D_kbdeg")
+mesh = SubResource("12")
 skeleton = NodePath("../..")
-material/0 = SubResource( 11 )
 
-[node name="Block3" type="MeshInstance" parent="World/Level"]
-transform = Transform( 1, 0, -1.73205, 0, 2, 0, 1.73205, 0, 1, 17.0351, 4, -18.9455 )
-mesh = SubResource( 12 )
+[node name="Block3" type="MeshInstance3D" parent="World/Level"]
+transform = Transform3D(1, 0, -1.73205, 0, 2, 0, 1.73205, 0, 1, 17.0351, 4, -18.9455)
+material_override = SubResource("StandardMaterial3D_r6dwh")
+mesh = SubResource("12")
 skeleton = NodePath("../..")
-material/0 = SubResource( 11 )
 
-[node name="Players" type="Spatial" parent="World"]
+[node name="Players" type="Node3D" parent="World"]
 
-[node name="UniformRotation1" type="Spatial" parent="World/Players"]
-script = ExtResource( 2 )
-degrees_per_second = Vector3( 0, -26, 0 )
+[node name="UniformRotation1" type="Node3D" parent="World/Players"]
+script = ExtResource("2")
+degrees_per_second = Vector3(0, -26, 0)
 
-[node name="Player1" type="MeshInstance" parent="World/Players/UniformRotation1"]
-transform = Transform( 0.984808, -6.64073e-10, -0.173648, -0.173648, -7.5904e-09, -0.984808, -6.64073e-10, 1, -7.5904e-09, 13, -1.2, 0 )
-mesh = SubResource( 8 )
+[node name="Player1" type="MeshInstance3D" parent="World/Players/UniformRotation1"]
+transform = Transform3D(0.984808, -6.64073e-10, -0.173648, -0.173648, -7.5904e-09, -0.984808, -6.64073e-10, 1, -7.5904e-09, 13, -1.2, 0)
+material_override = SubResource("StandardMaterial3D_21h1c")
+mesh = SubResource("8")
 skeleton = NodePath("../../../..")
-material/0 = SubResource( 9 )
 
-[node name="UniformRotation2" type="Spatial" parent="World/Players"]
-script = ExtResource( 2 )
-degrees_per_second = Vector3( 0, -22, 0 )
+[node name="UniformRotation2" type="Node3D" parent="World/Players"]
+script = ExtResource("2")
+degrees_per_second = Vector3(0, -22, 0)
 
-[node name="Player2" type="MeshInstance" parent="World/Players/UniformRotation2"]
-transform = Transform( 0.984808, 6.64073e-10, 0.173648, 0.173648, -7.5904e-09, -0.984808, 6.64073e-10, 1, -7.5904e-09, 17, -1.2, 0 )
-mesh = SubResource( 8 )
+[node name="Player2" type="MeshInstance3D" parent="World/Players/UniformRotation2"]
+transform = Transform3D(0.984808, 6.64073e-10, 0.173648, 0.173648, -7.5904e-09, -0.984808, 6.64073e-10, 1, -7.5904e-09, 17, -1.2, 0)
+material_override = SubResource("StandardMaterial3D_77y2y")
+mesh = SubResource("8")
 skeleton = NodePath("../../../..")
-material/0 = SubResource( 13 )
 
-[node name="VCameras" type="Spatial" parent="World"]
+[node name="VCameras" type="Node3D" parent="World"]
 
-[node name="Follow1" type="Spatial" parent="World/VCameras"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0.482905, -3.98861 )
-script = ExtResource( 4 )
+[node name="Follow1" type="Node3D" parent="World/VCameras"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0.482905, -3.98861)
+script = ExtResource("4")
 target_path = NodePath("../../Players/UniformRotation1/Player1")
-offset = Vector3( 0, 2, 0 )
-min_distance = 2.0
-max_distance = 5.0
+offset = Vector3(0, 2, 0)
 
-[node name="LookAt1" type="Spatial" parent="World/VCameras/Follow1"]
-transform = Transform( -1, 2.54818e-08, -1.4883e-07, 0, 0.985658, 0.168758, 1.50996e-07, 0.168758, -0.985658, 0, 0, 0 )
-script = ExtResource( 5 )
+[node name="LookAt1" type="Node3D" parent="World/VCameras/Follow1"]
+transform = Transform3D(-1, 2.54818e-08, -1.4883e-07, 0, 0.985658, 0.168758, 1.50996e-07, 0.168758, -0.985658, 0, 0, 0)
+script = ExtResource("5")
 look_at_target = NodePath("../../../Players/UniformRotation1/Player1")
-look_at_offset = Vector3( 0, 1, 0 )
+look_at_offset = Vector3(0, 1, 0)
 
-[node name="VCamera1" type="Spatial" parent="World/VCameras/Follow1/LookAt1" groups=["vcamera", "vcamera_1"]]
+[node name="VCamera1" type="Node3D" parent="World/VCameras/Follow1/LookAt1" groups=["vcamera", "vcamera_1"]]
 process_priority = -1000
-script = ExtResource( 3 )
+script = ExtResource("3")
 fov = 90.0
 
-[node name="Follow2" type="Spatial" parent="World/VCameras"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0.714761, -4.00029 )
-script = ExtResource( 4 )
+[node name="Follow2" type="Node3D" parent="World/VCameras"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0.714761, -4.00029)
+script = ExtResource("4")
 target_path = NodePath("../../Players/UniformRotation2/Player2")
-offset = Vector3( 0, 2, 0 )
-min_distance = 2.0
-max_distance = 5.0
+offset = Vector3(0, 2, 0)
 
-[node name="LookAt2" type="Spatial" parent="World/VCameras/Follow2"]
-transform = Transform( -1, 3.36599e-08, -1.47196e-07, 0, 0.974837, 0.22292, 1.50996e-07, 0.22292, -0.974837, 0, 0, 0 )
-script = ExtResource( 5 )
+[node name="LookAt2" type="Node3D" parent="World/VCameras/Follow2"]
+transform = Transform3D(-1, 3.36599e-08, -1.47196e-07, 0, 0.974837, 0.22292, 1.50996e-07, 0.22292, -0.974837, 0, 0, 0)
+script = ExtResource("5")
 look_at_target = NodePath("../../../Players/UniformRotation2/Player2")
-look_at_offset = Vector3( 0, 1, 0 )
+look_at_offset = Vector3(0, 1, 0)
 
-[node name="VCamera2" type="Spatial" parent="World/VCameras/Follow2/LookAt2" groups=["vcamera", "vcamera_2"]]
+[node name="VCamera2" type="Node3D" parent="World/VCameras/Follow2/LookAt2" groups=["vcamera", "vcamera_2"]]
 process_priority = -1000
-script = ExtResource( 3 )
+script = ExtResource("3")
 fov = 90.0

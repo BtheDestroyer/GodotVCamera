@@ -1,12 +1,12 @@
-tool
+@tool
 extends Control
 
 signal closing
 
-onready var aspect_option : OptionButton = $VBoxContainer/HBoxContainer/AspectOptionButton
-onready var aspect_container : AspectRatioContainer = $VBoxContainer/AspectRatioContainer
-onready var keep_option : OptionButton = $VBoxContainer/HBoxContainer/KeepOptionButton
-onready var camera : Camera = $VBoxContainer/AspectRatioContainer/ViewportContainer/Viewport/Camera
+@onready var aspect_option : OptionButton = $VBoxContainer/HBoxContainer/AspectOptionButton
+@onready var aspect_container : AspectRatioContainer = $VBoxContainer/AspectRatioContainer
+@onready var keep_option : OptionButton = $VBoxContainer/HBoxContainer/KeepOptionButton
+@onready var camera : Camera3D = $VBoxContainer/AspectRatioContainer/SubViewportContainer/SubViewport/Camera3D
 var target_vcamera : VCamera
 
 var aspect_ratios = [ 
@@ -26,8 +26,9 @@ func _ready() -> void:
 	keep_option.add_item("FOV: Keep Height")
 	keep_option.selected = 1
 	
-	target_vcamera.connect("tree_exited", self, "_on_CloseButton_pressed")
-	name = target_vcamera.name + " Preview"
+	if target_vcamera != null:
+		target_vcamera.connect("tree_exited", Callable(self, "_on_CloseButton_pressed"))
+		name = target_vcamera.name + " Preview"
 
 func _process(_delta: float) -> void:
 	if is_instance_valid(target_vcamera):

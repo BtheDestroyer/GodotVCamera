@@ -1,4 +1,4 @@
-extends Reference
+extends RefCounted
 
 var properties : Array = []
 var instance
@@ -58,7 +58,8 @@ func append_number_range(name : String, min_value : float, max_value : float, st
 	var new_property = {
 		name = name,
 		type = typeof(instance.get(name)),
-		hint = PROPERTY_HINT_EXP_RANGE if exponential else PROPERTY_HINT_RANGE,
+		#hint = PROPERTY_HINT_EXP_RANGE if exponential else PROPERTY_HINT_RANGE, 
+		hint = PROPERTY_HINT_RANGE, # PROPERTY_HINT_EXP_RANGE and PROPERTY_HINT_RANGE are now one and the same
 		hint_string = hint_string,
 		usage = property_usage
 	}
@@ -71,7 +72,7 @@ func append_enum(name : String, of_enum : Dictionary, allow_other_values : bool 
 		return
 	
 	match typeof(instance.get(name)):
-		TYPE_INT, TYPE_REAL:
+		TYPE_INT, TYPE_FLOAT:
 			allow_other_values = false
 		TYPE_STRING:
 			pass
@@ -130,7 +131,7 @@ func append_enum_flags(name : String, of_enum : Dictionary, property_usage = PRO
 	properties.append(new_property)
 
 func append_category(begins_with : String, name : String = ""):
-	if not name:
+	if name.is_empty():
 		name = begins_with.capitalize()
 	
 	properties.append({

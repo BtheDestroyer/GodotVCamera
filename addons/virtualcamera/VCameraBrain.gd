@@ -1,12 +1,13 @@
-tool
-extends Camera
+@tool
+@icon("res://addons/virtualcamera/VCameraBrain.svg")
+class_name VCameraBrain
+extends Camera3D
 
-class_name VCameraBrain, "res://addons/virtualcamera/VCameraBrain.svg"
 
-export var target_group : String = "vcamera"
+@export var target_group : String = "vcamera"
 var last_active_vcamera : VCamera = null
 var transition_time : float = 0.0
-var transition_start_transform : Transform
+var transition_start_transform : Transform3D
 var transition_start_fov : float
 var transition_start_near : float
 var transition_start_far : float

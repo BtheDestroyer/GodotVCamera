@@ -1,19 +1,19 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=20 format=3 uid="uid://raeu2n6trnvt"]
 
-[ext_resource path="res://addons/virtualcamera/TransformModifiers/UserInput/Orbiter.gd" type="Script" id=1]
-[ext_resource path="res://addons/virtualcamera/TransformModifiers/LookAtGroup.gd" type="Script" id=2]
-[ext_resource path="res://addons/virtualcamera/TransformModifiers/Follow.gd" type="Script" id=3]
-[ext_resource path="res://addons/virtualcamera/TransformModifiers/LookAt.gd" type="Script" id=4]
-[ext_resource path="res://addons/virtualcamera/TransformModifiers/Shake.gd" type="Script" id=5]
-[ext_resource path="res://addons/virtualcamera/VCameraBrain.gd" type="Script" id=6]
-[ext_resource path="res://addons/virtualcamera/TransformModifiers/UniformMovement/UniformRotation.gd" type="Script" id=7]
-[ext_resource path="res://addons/virtualcamera/VCameras/VCamera.gd" type="Script" id=8]
+[ext_resource type="Script" path="res://addons/virtualcamera/TransformModifiers/UserInput/Orbiter.gd" id="1"]
+[ext_resource type="Script" path="res://addons/virtualcamera/TransformModifiers/LookAtGroup.gd" id="2"]
+[ext_resource type="Script" path="res://addons/virtualcamera/TransformModifiers/Follow.gd" id="3"]
+[ext_resource type="Script" path="res://addons/virtualcamera/TransformModifiers/LookAt.gd" id="4"]
+[ext_resource type="Script" path="res://addons/virtualcamera/TransformModifiers/Shake.gd" id="5"]
+[ext_resource type="Script" path="res://addons/virtualcamera/VCameraBrain.gd" id="6"]
+[ext_resource type="Script" path="res://addons/virtualcamera/TransformModifiers/UniformMovement/UniformRotation.gd" id="7"]
+[ext_resource type="Script" path="res://addons/virtualcamera/VCameras/VCamera.gd" id="8"]
 
-[sub_resource type="GDScript" id=6]
+[sub_resource type="GDScript" id="6"]
 resource_name = "CameraChanger"
-script/source = "extends Spatial
+script/source = "extends Node3D
 
-onready var vcameras : Array = get_tree().get_nodes_in_group(\"vcamera\")
+@onready var vcameras : Array = get_tree().get_nodes_in_group(\"vcamera\")
 var index = 0
 
 func _process(delta: float) -> void:
@@ -24,28 +24,38 @@ func _process(delta: float) -> void:
 		vcameras[index].priority = 30
 "
 
-[sub_resource type="CubeMesh" id=1]
-size = Vector3( 2, 0, 2 )
+[sub_resource type="BoxMesh" id="1"]
+size = Vector3(2, 0, 2)
 
-[sub_resource type="CylinderMesh" id=2]
-top_radius = 0.5
-bottom_radius = 0.5
+[sub_resource type="CylinderMesh" id="2"]
 
-[sub_resource type="CylinderMesh" id=3]
+[sub_resource type="CylinderMesh" id="3"]
 top_radius = 1.5
 bottom_radius = 1.5
 height = 1.0
 
-[sub_resource type="CylinderMesh" id=4]
+[sub_resource type="CylinderMesh" id="4"]
 top_radius = 0.75
 bottom_radius = 0.75
 height = 1.0
 
-[sub_resource type="SphereMesh" id=5]
-radius = 0.5
-height = 1.0
+[sub_resource type="SphereMesh" id="5"]
 
-[sub_resource type="GDScript" id=7]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qne8l"]
+
+[sub_resource type="Sky" id="Sky_popkt"]
+sky_material = SubResource("ProceduralSkyMaterial_qne8l")
+
+[sub_resource type="Environment" id="Environment_7cysg"]
+background_mode = 2
+sky = SubResource("Sky_popkt")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_o3o6t"]
+seed = 889483742
+fractal_octaves = 4
+fractal_gain = 0.8
+
+[sub_resource type="GDScript" id="7"]
 script/source = "extends Label
 
 func _process(delta:float):
@@ -53,159 +63,142 @@ func _process(delta:float):
 	var brain = $\"../../../VCameraBrain\"
 	if brain && brain.last_active_vcamera != null:
 		camera_name = brain.last_active_vcamera.name
-	text = \"Current Camera: \" + camera_name
+	text = \"Current Camera3D: \" + camera_name
 "
 
-[node name="VCameraExample" type="Spatial"]
-script = SubResource( 6 )
+[node name="VCameraExample" type="Node3D"]
+script = SubResource("6")
 
 [node name="Level" type="Node" parent="."]
 
-[node name="DirectionalLight" type="DirectionalLight" parent="Level"]
-transform = Transform( 0.742981, 0.175351, -0.645934, 0, 0.965071, 0.261987, 0.669312, -0.194651, 0.71703, 0, 3.5684, 0 )
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Level"]
+transform = Transform3D(0.742981, 0.175351, -0.645934, 0, 0.965071, 0.261987, 0.669312, -0.194651, 0.71703, 0, 3.5684, 0)
+shadow_enabled = true
 
-[node name="Ground" type="MeshInstance" parent="Level"]
-transform = Transform( 15, 0, 0, 0, 1, 0, 0, 0, 15, 0, 0, 0 )
-mesh = SubResource( 1 )
-material/0 = null
+[node name="Ground" type="MeshInstance3D" parent="Level"]
+transform = Transform3D(15, 0, 0, 0, 1, 0, 0, 0, 15, 0, 0, 0)
+mesh = SubResource("1")
 
-[node name="Pillar1" type="MeshInstance" parent="Level"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 0 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="Pillar1" type="MeshInstance3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 0)
+mesh = SubResource("2")
 
-[node name="Pillar2" type="MeshInstance" parent="Level"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -2 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="Pillar2" type="MeshInstance3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -2)
+mesh = SubResource("2")
 
-[node name="Pillar3" type="MeshInstance" parent="Level"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, -2 )
-mesh = SubResource( 3 )
-material/0 = null
+[node name="Pillar3" type="MeshInstance3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, -2)
+mesh = SubResource("3")
 
-[node name="Pillar4" type="MeshInstance" parent="Level/Pillar3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5 )
-mesh = SubResource( 4 )
+[node name="Pillar4" type="MeshInstance3D" parent="Level/Pillar3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
+mesh = SubResource("4")
 skeleton = NodePath("../..")
-material/0 = null
 
-[node name="UniformRotation" type="Spatial" parent="Level"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
-script = ExtResource( 7 )
-degrees_per_second = Vector3( 0, 20, 0 )
+[node name="UniformRotation" type="Node3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("7")
+degrees_per_second = Vector3(0, 20, 0)
 
-[node name="Character" type="MeshInstance" parent="Level/UniformRotation"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0 )
-mesh = SubResource( 5 )
+[node name="Character" type="MeshInstance3D" parent="Level/UniformRotation"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+mesh = SubResource("5")
 skeleton = NodePath("../../..")
-material/0 = null
 
-[node name="VCameraBrain" type="Camera" parent="."]
+[node name="VCameraBrain" type="Camera3D" parent="."]
 process_priority = -1000
-transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -4, 2.4, 2 )
-fov = 70.0167
-script = ExtResource( 6 )
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -4, 2.4, 2)
+environment = SubResource("Environment_7cysg")
+fov = 70.0
+far = 100.0
+script = ExtResource("6")
 
-[node name="StaticVCamera" type="Spatial" parent="."]
+[node name="StaticVCamera" type="Node3D" parent="." groups=["vcamera"]]
 process_priority = -1000
-transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -4, 2.4, 2 )
-script = ExtResource( 8 )
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -4, 2.4, 2)
+script = ExtResource("8")
 
-[node name="StaticVCamera2" type="Spatial" parent="."]
+[node name="StaticVCamera2" type="Node3D" parent="." groups=["vcamera"]]
 process_priority = -1000
-transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 3, 2.4, 2 )
-script = ExtResource( 8 )
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 3, 2.4, 2)
+script = ExtResource("8")
 fov = 100.0
 
-[node name="Shake" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.746, 4 )
-script = ExtResource( 5 )
-shake_strength_rotation = Vector3( 10, 10, 0 )
+[node name="Shake" type="Node3D" parent="."]
+script = ExtResource("5")
+noise = SubResource("FastNoiseLite_o3o6t")
 
-[node name="ShakyVCamera" type="Spatial" parent="Shake"]
+[node name="ShakyVCamera" type="Node3D" parent="Shake" groups=["vcamera"]]
 process_priority = -1000
-script = ExtResource( 8 )
+script = ExtResource("8")
 fov = 90.0
 
-[node name="Follow1" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 0 )
-script = ExtResource( 3 )
-follow_target = NodePath("../Level/UniformRotation/Character")
-follow_lerp_t = 0.9
+[node name="Follow1" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 0)
+script = ExtResource("3")
 
-[node name="LookAt" type="Spatial" parent="Follow1"]
-transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0 )
-script = ExtResource( 4 )
-__meta__ = {
-"_editor_description_": "This LookAt places the children objects in the followed character's transformation space. This way translation is always relative to the character's movement."
-}
+[node name="LookAt" type="Node3D" parent="Follow1"]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0)
+script = ExtResource("4")
 look_at_target = NodePath("../../Level/UniformRotation/Character")
 
-[node name="LookAt" type="Spatial" parent="Follow1/LookAt"]
-transform = Transform( 1, 0, -0.000495781, 0, 1, 0, 0.000495781, 0, 1, -0.00247526, 2, 4.99225 )
-script = ExtResource( 4 )
+[node name="LookAt" type="Node3D" parent="Follow1/LookAt"]
+transform = Transform3D(1, 0, -0.000495781, 0, 1, 0, 0.000495781, 0, 1, -0.00247526, 2, 4.99225)
+script = ExtResource("4")
 look_at_target = NodePath("../../../Level/UniformRotation/Character")
-look_at_offset = Vector3( 0, 2, 0 )
+look_at_offset = Vector3(0, 2, 0)
 
-[node name="FollowerVCamera" type="Spatial" parent="Follow1/LookAt/LookAt"]
+[node name="FollowerVCamera" type="Node3D" parent="Follow1/LookAt/LookAt" groups=["vcamera"]]
 process_priority = -1000
-transform = Transform( 1, 0, 0, 0, 1, -2.98023e-08, 0, 5.96046e-08, 1, 0, 0, 0 )
-script = ExtResource( 8 )
+transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 5.96046e-08, 1, 0, 0, 0)
+script = ExtResource("8")
 fov = 60.0
 
-[node name="Follow2" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 0 )
-script = ExtResource( 3 )
-follow_target = NodePath("../Level/UniformRotation/Character")
-follow_lerp_t = 0.9
+[node name="Follow2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 0)
+script = ExtResource("3")
 
-[node name="Orbiter" type="Spatial" parent="Follow2"]
-transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0 )
-script = ExtResource( 1 )
+[node name="Orbiter" type="Node3D" parent="Follow2"]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0)
+script = ExtResource("1")
 lerp_speed = 0.2
-orbit_radii = Vector3( 0.5, 3, 1 )
-orbit_heights = Vector3( 1.5, 1, -0.5 )
+orbit_radii = Vector3(0.5, 3, 1)
+orbit_heights = Vector3(1.5, 1, -0.5)
 
-[node name="LookAt" type="Spatial" parent="Follow2/Orbiter"]
-transform = Transform( -1, -5.61559e-08, -1.40165e-07, 1.77636e-15, 0.928271, -0.371904, 1.50996e-07, -0.371904, -0.928271, 0, 0, 0 )
-script = ExtResource( 4 )
+[node name="LookAt" type="Node3D" parent="Follow2/Orbiter"]
+transform = Transform3D(-1, -5.61559e-08, -1.40165e-07, 1.77636e-15, 0.928271, -0.371904, 1.50996e-07, -0.371904, -0.928271, 0, 0, 0)
+script = ExtResource("4")
 look_at_target = NodePath("../../../Level/UniformRotation/Character")
-look_at_offset = Vector3( 0, 1, 0 )
+look_at_offset = Vector3(0, 1, 0)
 
-[node name="OrbiterVCamera" type="Spatial" parent="Follow2/Orbiter/LookAt"]
+[node name="OrbiterVCamera" type="Node3D" parent="Follow2/Orbiter/LookAt" groups=["vcamera"]]
 process_priority = -1000
-transform = Transform( 1, 0, 0, 0, 1, -2.98023e-08, 0, 5.96046e-08, 1, 0, 0, 0 )
-script = ExtResource( 8 )
+transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 5.96046e-08, 1, 0, 0, 0)
+script = ExtResource("8")
 
-[node name="LookAtGroup" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.20606, 4.12931, 3.09742 )
-script = ExtResource( 2 )
-look_at_targets = [ NodePath("../Level/Pillar1"), NodePath("../Level/Pillar2"), NodePath("../Level/UniformRotation/Character") ]
-target_weights = [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ) ]
+[node name="LookAtGroup" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.20606, 4.12931, 3.09742)
+script = ExtResource("2")
+look_at_targets = Array[NodePath]([NodePath("../Level/Pillar1"), NodePath("../Level/Pillar2"), NodePath("../Level/UniformRotation/Character")])
+target_weights = Array[Vector3]([Vector3(1, 1, 1), Vector3(1, 1, 1), Vector3(1, 1, 1)])
 
-[node name="GroupTrackerVCamera" type="Spatial" parent="LookAtGroup"]
+[node name="GroupTrackerVCamera" type="Node3D" parent="LookAtGroup" groups=["vcamera"]]
 process_priority = -1000
-script = ExtResource( 8 )
+script = ExtResource("8")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-margin_right = 14.0
-margin_bottom = 14.0
+offset_right = 14.0
+offset_bottom = 14.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 244.0
-margin_bottom = 39.0
+layout_mode = 2
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
-margin_right = 237.0
-margin_bottom = 14.0
+layout_mode = 2
 text = "Press space to change virtual camera"
 
 [node name="CurrentCameraName" type="Label" parent="PanelContainer/VBoxContainer"]
-margin_top = 18.0
-margin_right = 237.0
-margin_bottom = 32.0
-text = "Current Camera: WWWWW"
-script = SubResource( 7 )
+layout_mode = 2
+text = "Current Camera3D: WWWWW"
+script = SubResource("7")
